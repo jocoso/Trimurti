@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/jocoso/a-random-blog/issues"
   },
-  "homepage": "https://github.com/jocoso/a-random-blog#readme"
+  "homepage": "https://github.com/jocoso/a-random-blog#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-handlebars": "^8.0.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.9"
+  }
 }
