@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const path = require('path');
 const controllers = require('./controllers');
+const Database = require('./connections/connections');
 
 
 const app = express();
