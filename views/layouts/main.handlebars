@@ -14,13 +14,13 @@
     <body>
         <main>
             <div id="header">
-                {{!-- Title --}}
+                {{! Title }}
 
                 <h1 id="title">
                     Joshua's Corner
                 </h1>
 
-                {{!-- Navbar --}}
+                {{! Navbar }}
 
                 <ul id="navbar">
                     <li>
@@ -39,11 +39,38 @@
                         </a>
                     </li>
                 </ul>
-                
+
             </div>
             <div id="content">
                 {{! Body of the page for content }}
                 {{{body}}}
+
+                <div class="post-template">
+
+                    <header class="post-header">
+                        <title class="post-title">
+                            A title
+                        </title>
+                        <p class="post-data">
+                            Posted by:
+                            {{person}}
+                            on
+                            {{date}}
+                        </p>
+                    </header>
+
+                    <div class="post-body">
+                        <p class="post-displayContent">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Nulla faucibus ligula a mauris laoreet
+                            finibus. Phasellus dolor mi, volutpat quis dictum
+                            et, venenatis eget nulla. Duis varius erat sit amet
+                            lobortis porttitor. Morbi dapibus, tellus id
+                            placerat fermentum, urna odio eleifend tortor, vitae
+                            dignissim tellus lorem vel mauris. Fusce accumsan.
+                        </p>
+                    </div>
+                </div>
             </div>
         </main>
     </body>
