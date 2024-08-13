@@ -1,9 +1,9 @@
-// Homepage
+// Dashboard
 
 const router = require('express').Router();
 
 router.get('/', async (req, res) => {
-    res.render('home');
+    res.render('dash');
 })
 
 module.exports = router;
