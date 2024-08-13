@@ -7,7 +7,7 @@ const Database = require('./connections/connections');
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Set up handlebars.js
 const hbs = exphbs.create({ helpers });

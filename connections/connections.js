@@ -1,8 +1,8 @@
-const postgres = require('postgres');
-require('dotenv').config();
+const postgres = require("postgres");
+require("dotenv").config();
 
 // Importing PostgreSQL client...
-const { Pool } = require('pg');
+const { Pool } = require("pg");
 
 // Connecting to database...
 const pool = new Pool({
@@ -17,13 +17,16 @@ async function setupDB() {
     const client = await pool.connect();
 
     try {
-        const result = await client.query('SELECT NOW()'); // Checking if all in order
-        console.log("Connection was successful, server time is: ", result.rows[0].now);
+        const result = await client.query("SELECT NOW()"); // Checking if all in order
+        console.log(
+            "Connection was successful, server time is: ",
+            result.rows[0].now
+        );
         return client;
     } catch (err) {
         console.error("Database connection encountered an error", err);
-        exit(2);
-    } 
+        exit(2); // Leave program with a frown
+    }
 }
 
 module.exports = setupDB();
