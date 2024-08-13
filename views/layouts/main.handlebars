@@ -14,10 +14,35 @@
     <body>
         <main>
             <div id="header">
-                {{!-- Top of the website is for navbar and title --}}
+                {{!-- Title --}}
+
+                <h1 id="title">
+                    Joshua's Corner
+                </h1>
+
+                {{!-- Navbar --}}
+
+                <ul id="navbar">
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/dash">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/auth">
+                            Login
+                        </a>
+                    </li>
+                </ul>
+                
             </div>
             <div id="content">
-                {{!-- Body of the page for content --}}
+                {{! Body of the page for content }}
                 {{{body}}}
             </div>
         </main>
