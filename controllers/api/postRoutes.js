@@ -6,23 +6,24 @@ const { Post } = require("../../models")
 // Add a new Post
 router.post('/', async (req, res) => {
     try {
+        // Creating Post
+        const response = await Post.create({
+            ...req.body,
+        });
 
-        const response = await Post.findAll();
-        const postData = response.map(post => post.get({ plain: true }));
-
-        // Showing in the homepage
-        res.render('home', {
-            message: "Posts successfully created.",
-            data: postData,
+        // Pet Created without errors
+        res.status(200).json({
+            message: "Pet successfully created",
+            data: response,
         });
 
     } catch (err) {
-
-        res.render('home', {
-            message: "Couldn't communicate with the database.",
+        // Code-Breaking error
+        res.status(400).json({
+            message: "Post couldn't be created.",
             data: [],
             error: err,
-        })
+        });
     }
 });
 
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
 
     } catch (err) {
 
-        // A code-breaking error
+        // Code-breaking error
         res.status(400).json({
             message: "Failed to retrieve posts.",
             data: [],
@@ -86,7 +87,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-// Update a post by ID
+// Update a Post
 router.put('/:id', async (req, res) => {
     try {
 
@@ -117,9 +118,43 @@ router.put('/:id', async (req, res) => {
             message: "Post couldn't be updated at this time.",
             data: [],
             error: err,
-        })
+        });
 
     }
 });
+
+// Delete a Post
+router.delete('/:id', async (req, res) => {
+    // Deleting...
+    try {
+
+        const response = Post.destroy({
+            where: { id: req.params.id },
+        });
+
+        // Unknown ID
+        if (!response) {
+            res.status(404).json({
+                message: "Couldn't find post.",
+                data: [],
+            });
+        }
+
+        // A success!
+        res.status(200).json({
+            message: "Post deleted successfully!",
+            data: response,
+        })
+
+    } catch (err) {
+        // A code-breaking error
+        res.status(500).json({
+            message: "Post couldn't be deleted at this time.",
+            data: [],
+            error: err,
+        })
+    }
+});
+
 
 module.exports = router;
