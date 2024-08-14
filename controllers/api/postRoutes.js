@@ -6,6 +6,7 @@ const { Post } = require("../../models")
 // Add a new Post
 router.post('/', async (req, res) => {
     try {
+
         const response = await Post.findAll();
 
         const postData = response.map(post => post.get({ plain: true }));
@@ -36,5 +37,6 @@ router.get('/', async (req, res) => {
         })
     }
 })
+
 
 module.exports = router;
