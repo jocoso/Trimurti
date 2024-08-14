@@ -1,28 +1,37 @@
-const postgres = require("postgres");
-require("dotenv").config();
-
 // Importing PostgreSQL client...
-const { Pool } = require("pg");
+const Sequelize = require('sequelize');
+require('dotenv').config();
 
-// Connecting to database...
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false },
-});
+let sequelize; // Let's Sequelize!
 
-async function setupDB() {
-    const client = await pool.connect();
-    
-    try {
-        const result = await pool.query("SELECT NOW()"); // Checking if all in order
-        console.log(
-            "Connection was successful, server time is: ",
-            result.rows[0].now
-        );
-        return client;
-    } catch (err) {
-        console.error("Database connection encountered an error", err); // Leave program with a frown
-    }
+// To make Render happy.
+if(process.env.DATABASE_URL) {
+    sequelize = new Sequelize(
+        process.env.DATABASE_URL,
+        {
+            dialect: 'postgres',
+            protocol: 'postgres',
+            dialectOptions: {
+                ssl: {
+                    require: true,
+                    rejectUnauthorized: false // Note: Setting this to false can make the connection less secure
+                }
+            }, // To Remove SSL
+        },
+    );
+} else {
+    // XXX: Haven't set this one up yet.
+    sequelize = new Sequelize(
+        process.env.DB_NAME,
+        process.env.DB_USER,
+        process.env.DB_PASSWORD,
+        {
+            host: process.env.DB_HOST,
+            dialect: 'postgres',
+            port: process.env.DB_PORT || 5432,
+
+        },
+    );
 }
 
-module.exports = setupDB();
+module.exports = sequelize;

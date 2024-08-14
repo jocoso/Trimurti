@@ -3,7 +3,8 @@ const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const path = require('path');
 const controllers = require('./controllers');
-const Database = require('./connections/connections');
+const database = require('./connections/connections');
+
 
 
 const app = express();
@@ -25,11 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(controllers);
 
-const main = () => {
+const main = async () => {
     try {
+        await database.sync({ force: false })
         app.listen(PORT, () => console.log(`Now listening... PORT: https://localhost:${PORT}`));
     } catch (err) {
         console.error(`Error Listening to port https://localhost:${PORT}`);
+        process.exit(1);
     }
 };
 
