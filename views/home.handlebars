@@ -1,1 +1,27 @@
 <h1>Homepage</h1>
+
+{{#each posts}}
+
+{{!-- POST TEMPLATE --}}
+
+<div class="post-template">
+
+    <header class="post-header">
+        <div class="post-title">
+            {{this.title}}
+        </div>
+        <p class="post-data">
+            Posted by:
+            {{this.author}}
+            on
+            {{this.date_of_creation}}
+        </p>
+    </header>
+
+    <div class="post-body">
+        <p class="post-displayContent">
+            {{this.content}}
+        </p>
+    </div>
+</div>
+{{/each}}

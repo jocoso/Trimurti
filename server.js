@@ -3,11 +3,14 @@ const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const path = require('path');
 const controllers = require('./controllers');
-const Database = require('./connections/connections');
+const database = require('./connections/connections');
+
 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+let server;
 
 // Set up handlebars.js
 const hbs = exphbs.create({ helpers });
@@ -25,12 +28,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(controllers);
 
-const main = () => {
+const main = async () => {
     try {
-        app.listen(PORT, () => console.log(`Now listening... PORT: https://localhost:${PORT}`));
+        if (process.env.NODE_ENV !== 'test') { // Prepping for testing
+            await database.sync({ force: false })
+            server = app.listen(PORT, () => console.log(`Now listening... PORT: https://localhost:${PORT}`));
+        }
     } catch (err) {
         console.error(`Error Listening to port https://localhost:${PORT}`);
+        process.exit(1);
     }
 };
 
 main();
+
+module.exports = { app, server };

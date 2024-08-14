@@ -1,8 +1,9 @@
 const database = require("../connections/connections");
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes, NOW } = require("sequelize");
 
 class Post extends Model {}
 
+// What a post should look like.
 Post.init({
         id: {
             type: DataTypes.INTEGER,
@@ -20,7 +21,7 @@ Post.init({
         },
         date_of_creation: {
             type: DataTypes.DATE,
-            allowNull: false,
+            defaultValue: NOW,
         },
         content: {
             type: DataTypes.TEXT,
@@ -28,7 +29,7 @@ Post.init({
         },
     },
     {
-        sequelize,
+        sequelize: database,
         timestamps: false,
         modelName: 'Post',
     }
