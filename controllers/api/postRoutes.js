@@ -14,7 +14,7 @@ router.post('/', async (req, res) => {
         // Pet Created without errors
         res.status(200).json({
             message: "Pet successfully created",
-            data: response,
+            data: response.toJSON(),
         });
 
     } catch (err) {
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         res.status(400).json({
             message: "Post couldn't be created.",
             data: [],
-            error: err,
+            error: err.message,
         });
     }
 });
@@ -32,12 +32,17 @@ router.get('/', async (req, res) => {
     try {
 
         // Getting all posts
-        const response = await Post.findAll();
+        const posts = await Post.findAll();
+
+        if (!posts) {
+            console.log({ message: "Couldn't find post.", data: [] });
+            return res.status(404).json({ message: "Couldn't find post.", data: [] });
+        }
 
         // Posts were found successfully!
         res.status(200).json({
             message: "Posts successfully retrieved.",
-            data: response,
+            data: posts,
         });
 
     } catch (err) {
@@ -57,23 +62,22 @@ router.get('/:id', async (req, res) => {
     try {
 
         // Getting by Primary Key
-        const response = await Post.findByPk(
-            req.params.id,
-            {
-            }
-        );
+        const post = await Post.findByPk(req.params.id);
 
         // Incorrect ID
-        if (!response[0]) {
-            res.status(404).json({
-                message: "Couldn't find post.",
+        if (!post) {
+
+            return res.status(404).json({
+                message: "Couldn't find the post",
+                data: []
             });
+
         }
 
         // Post was found
         res.status(200).json({
             message: "Post successfully retrieved.",
-            data: response,
+            data: post,
         })
 
     } catch (err) {
@@ -82,7 +86,7 @@ router.get('/:id', async (req, res) => {
         res.status(400).json({
             message: "Post couldn't be retrieved at this time",
             data: [],
-            error: err,
+            error: err.message,
         })
     }
 });
