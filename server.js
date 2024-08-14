@@ -10,6 +10,8 @@ const database = require('./connections/connections');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+let server;
+
 // Set up handlebars.js
 const hbs = exphbs.create({ helpers });
 
@@ -28,8 +30,10 @@ app.use(controllers);
 
 const main = async () => {
     try {
-        await database.sync({ force: false })
-        app.listen(PORT, () => console.log(`Now listening... PORT: https://localhost:${PORT}`));
+        if (process.env.NODE_ENV !== 'test') { // Prepping for testing
+            await database.sync({ force: false })
+            server = app.listen(PORT, () => console.log(`Now listening... PORT: https://localhost:${PORT}`));
+        }
     } catch (err) {
         console.error(`Error Listening to port https://localhost:${PORT}`);
         process.exit(1);
@@ -37,3 +41,5 @@ const main = async () => {
 };
 
 main();
+
+module.exports = { app, server };
