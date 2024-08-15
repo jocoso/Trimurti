@@ -1,7 +1,7 @@
 // Post
 
 const router = require("express").Router();
-const { Post } = require("../../models")
+const { Post, User } = require("../../models")
 
 // Add a new Post
 router.post('/', async (req, res) => {
@@ -9,11 +9,12 @@ router.post('/', async (req, res) => {
         // Creating Post
         const response = await Post.create({
             ...req.body,
+            user_id: (req.session.user_id || 1),
         });
 
-        // Pet Created without errors
+        // Post Created without errors
         res.status(200).json({
-            message: "Pet successfully created",
+            message: "Post successfully created",
             data: response.toJSON(),
         });
 
@@ -32,7 +33,9 @@ router.get('/', async (req, res) => {
     try {
 
         // Getting all posts
-        const posts = await Post.findAll();
+        const posts = await Post.findAll({
+            include: [{ model: User, attributes: ['username'] }],
+        });
 
         if (!posts) {
             console.log({ message: "Couldn't find post.", data: [] });
@@ -62,7 +65,9 @@ router.get('/:id', async (req, res) => {
     try {
 
         // Getting by Primary Key
-        const post = await Post.findByPk(req.params.id);
+        const post = await Post.findByPk(req.params.id,
+            { include: [{ model: User, attributes: ['username'] }] }
+        );
 
         // Incorrect ID
         if (!post) {

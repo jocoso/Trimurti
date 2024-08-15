@@ -4,7 +4,7 @@ require('dotenv').config();
 
 let sequelize; // Let's Sequelize!
 
-// To make Render happy.
+// For Render
 if(process.env.DATABASE_URL) {
     sequelize = new Sequelize(
         process.env.DATABASE_URL,
@@ -20,7 +20,7 @@ if(process.env.DATABASE_URL) {
         },
     );
 } else {
-    // XXX: Haven't set this one up yet.
+    // In the case I can't use Render server
     sequelize = new Sequelize(
         process.env.DB_NAME,
         process.env.DB_USER,
