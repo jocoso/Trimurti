@@ -38,4 +38,60 @@ router.post("/", async (req, res) => {
     }
 });
 
+// Login
+router.post("/login", async (req, res) => {
+
+    try {
+
+        // Finding user...
+        const userData = await User.findOne({
+            where: { username: req.body.username },
+        });
+
+        // Couldn't find the User.
+        if (!userData) {
+
+            return res.status(400).json({
+                message: "No user registered with that username.",
+                data: []
+            });
+
+        }
+
+        // Checking passwords match...
+        const isPasswordValid = await bcrypt.compare(
+            req.body.password,
+            userData.password
+        );
+
+        // Passwords do not match.
+        if (!isPasswordValid) {
+            return res.status(400).json({
+                message: "Incorrect password. Please try again.",
+                data: []
+            });
+        }
+
+        // Success! Saving the session in the store
+        req.session.save(() => {
+            req.session.user_id = userData.id;
+            req.session.logged_in = true;
+            res.json({
+                message: "You have successfully logged in",
+                data: userData
+            })
+        });
+
+    } catch (err) { 
+
+        // Crash
+        res.status(500).json({
+            message: "Login has failed. Please try again later...",
+            data: [],
+            error: err.message
+        });
+
+    }
+})
+
 module.exports = router;
