@@ -12,7 +12,7 @@ const hashPassword = async (password) => {
 }
 
 // New User 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
     try {
 
         req.body.password = await hashPassword(req.body.password);
@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
 });
 
 // Login
-router.post("/login", async (req, res) => {
+router.post('/login', async (req, res) => {
 
     try {
 
@@ -82,7 +82,7 @@ router.post("/login", async (req, res) => {
             })
         });
 
-    } catch (err) { 
+    } catch (err) {
 
         // Crash
         res.status(500).json({
@@ -92,6 +92,45 @@ router.post("/login", async (req, res) => {
         });
 
     }
-})
+
+});
+
+// Logout
+router.post('/logout', (req, res) => {
+
+    try {
+
+        // If a section is active...
+        if (req.session.logged_in) {
+
+            // Kill session.
+            req.session.destroy(() => {
+                return res.status(200).json({
+                    message: "Logged in successfully.",
+                    data: []
+                });
+            });
+
+        } else { // If no active session
+
+            // Complain
+            return res.status(400).json({
+                message: "No session to log out from.",
+                data: [],
+                error: new Error("ERROR: Log out unsuccessful")
+            });
+        }
+
+    } catch (err) {
+
+        // A more serious error
+        return res.status(500).json({
+            message: "An error has ocurred while trying to logout.",
+            data: [],
+            error: err.message
+        });
+
+    }
+});
 
 module.exports = router;
