@@ -12,9 +12,9 @@ router.post('/', async (req, res) => {
             user_id: (req.session.user_id || 1),
         });
 
-        // Pet Created without errors
+        // Post Created without errors
         res.status(200).json({
-            message: "Pet successfully created",
+            message: "Post successfully created",
             data: response.toJSON(),
         });
 
