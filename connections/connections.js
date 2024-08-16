@@ -26,3 +26,4 @@ async function setupDB() {
 }
 
 module.exports = setupDB();
+
