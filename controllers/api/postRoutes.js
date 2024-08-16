@@ -6,6 +6,7 @@ const { Post, User } = require("../../models");
 // Add a new Post
 router.post("/", async (req, res) => {
     try {
+
         // Retrieving important information about the post and its author...
         const { title, content } = req.body;
         const author_id = req.session.author_id;
