@@ -6,10 +6,22 @@ const { Post, User } = require("../../models");
 // Add a new Post
 router.post("/", async (req, res) => {
     try {
-        
-        // Creating Post...
+
+        // Retrieving important information about the post and its author...
         const { title, content } = req.body;
         const author_id = req.session.author_id;
+
+        // Only registered users can post
+        if (!author_id) {
+            return res
+                .status(403) // Forbidden
+                .json({
+                    message: "Only registered users may post.",
+                    data: [],
+                    error: "- Unauthorized User -",
+                });
+        }
+
         const newPost = await Post.create({ title, content, author_id });
 
         // Post Created without errors.
