@@ -15,14 +15,18 @@ const hashPassword = async (password) => {
 router.post('/', async (req, res) => {
     try {
 
+        // Season Password...
         req.body.password = await hashPassword(req.body.password);
+
+        // Putting the user in the oven at 380 degrees...
         const newUser = await User.create({
             username: req.body.username,
             password: req.body.password,
         });
 
+        // Saving the rest for later...
         req.session.save(() => {
-            req.session.user_id = newUser.isSoftDeleted;
+            req.session.author_id = newUser.isSoftDeleted;
             req.session.logged_in = true;
             res.status(200).json(newUser);
         });
@@ -30,6 +34,7 @@ router.post('/', async (req, res) => {
 
     } catch (err) {
 
+        // We burn it. ):
         res.status(400).json({
             message: "Failed to create user.",
             data: [],
@@ -74,7 +79,7 @@ router.post('/login', async (req, res) => {
 
         // Success! Saving the session in the store
         req.session.save(() => {
-            req.session.user_id = userData.id;
+            req.session.author_id = userData.id;
             req.session.logged_in = true;
             res.json({
                 message: "You have successfully logged in",
@@ -106,7 +111,7 @@ router.post('/logout', (req, res) => {
             // Kill session.
             req.session.destroy(() => {
                 return res.status(200).json({
-                    message: "Logged in successfully.",
+                    message: "Logged out successfully.",
                     data: []
                 });
             });

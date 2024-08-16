@@ -6,7 +6,7 @@ class Post extends Model {}
 
 // What a post should look like.
 Post.init({
-        id: {
+        id: {   
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
@@ -27,7 +27,7 @@ Post.init({
         author_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'Users', // XXX CASE IMPORTANT
+                model: User, 
                 key: 'id'
             },
         }
@@ -40,5 +40,17 @@ Post.init({
     }
 
 );
+
+User.hasMany(Post, {
+    foreignKey: 'author_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+});
+
+Post.belongsTo(User, {
+    foreignKey: 'author_id',
+    onDelete: 'CASCADE',
+    onUpdate: 'CASCADE'
+})
 
 module.exports = Post;
