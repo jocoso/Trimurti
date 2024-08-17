@@ -15,10 +15,17 @@ router.post('/', async (req, res) => {
     try {
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Season Password...
         req.body.password = await hashPassword(req.body.password);
 
         // Putting the user in the oven at 380 degrees...
+=======
+        // Seasoning the password...
+        req.body.password = await hashPassword(req.body.password);
+
+        // Creating user...
+>>>>>>> Stashed changes
 =======
         // Seasoning the password...
         req.body.password = await hashPassword(req.body.password);
@@ -31,9 +38,15 @@ router.post('/', async (req, res) => {
         });
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // Saving the rest for later...
         req.session.save(() => {
             req.session.author_id = newUser.isSoftDeleted;
+=======
+        // Saving user in session.
+        req.session.save(() => {
+            req.session.user_id = newUser.id;
+>>>>>>> Stashed changes
 =======
         // Saving user in session.
         req.session.save(() => {
@@ -47,7 +60,11 @@ router.post('/', async (req, res) => {
     } catch (err) {
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // We burn it. ):
+=======
+        // A code-breaking error happened.
+>>>>>>> Stashed changes
 =======
         // A code-breaking error happened.
 >>>>>>> Stashed changes

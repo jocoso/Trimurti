@@ -1,6 +1,7 @@
 // Post
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 const router = require("express").Router();
 const { Post, User } = require("../../models");
 
@@ -8,6 +9,8 @@ const { Post, User } = require("../../models");
 router.post("/", async (req, res) => {
     try {
 =======
+=======
+>>>>>>> Stashed changes
 const router = require('express').Router();
 const { Post, User } = require('../../models')
 
@@ -44,15 +47,22 @@ router.post('/', async (req, res) => {
         res.status(200).json({
             message: "Post successfully created",
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             data: newPost.toJSON(),
+=======
+            data: response,
+>>>>>>> Stashed changes
 =======
             data: response,
 >>>>>>> Stashed changes
         });
     } catch (err) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         // An oopsie
 =======
+=======
+>>>>>>> Stashed changes
 
         // Code-Breaking error
 >>>>>>> Stashed changes
@@ -161,10 +171,16 @@ router.put("/:id", async (req, res) => {
 
 // Delete a Post
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 router.delete("/:id", async (req, res) => {
     // Deleting...
 =======
 router.delete('/:id', async (req, res) => {
+=======
+router.delete('/:id', async (req, res) => {
+
+    try {
+>>>>>>> Stashed changes
 
 >>>>>>> Stashed changes
     try {
@@ -187,7 +203,10 @@ router.delete('/:id', async (req, res) => {
             data: response,
         });
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 
 >>>>>>> Stashed changes
     } catch (err) {
@@ -197,8 +216,14 @@ router.delete('/:id', async (req, res) => {
             message: "Post couldn't be deleted at this time.",
             data: [],
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             error: err,
         });
+=======
+            error: err.message
+        });
+
+>>>>>>> Stashed changes
 =======
             error: err.message
         });
