@@ -1,13 +1,5 @@
 // Post
 
-<<<<<<< Updated upstream
-const router = require("express").Router();
-const { Post, User } = require("../../models");
-
-// Add a new Post
-router.post("/", async (req, res) => {
-    try {
-=======
 const router = require('express').Router();
 const { Post, User } = require('../../models')
 
@@ -21,7 +13,6 @@ router.post('/', async (req, res) => {
             ...req.body,
             user_id: req.session.user_id,
         });
->>>>>>> Stashed changes
 
         // Retrieving important information about the post and its author...
         const { title, content } = req.body;
@@ -43,19 +34,12 @@ router.post('/', async (req, res) => {
         // Post Created without errors.
         res.status(200).json({
             message: "Post successfully created",
-<<<<<<< Updated upstream
             data: newPost.toJSON(),
-=======
-            data: response,
->>>>>>> Stashed changes
         });
+
     } catch (err) {
-<<<<<<< Updated upstream
-        // An oopsie
-=======
 
         // Code-Breaking error
->>>>>>> Stashed changes
         res.status(400).json({
             message: "Post couldn't be created.",
             data: [],
@@ -160,14 +144,11 @@ router.put("/:id", async (req, res) => {
 });
 
 // Delete a Post
-<<<<<<< Updated upstream
 router.delete("/:id", async (req, res) => {
-    // Deleting...
-=======
-router.delete('/:id', async (req, res) => {
-
->>>>>>> Stashed changes
+  
     try {
+       
+        // Destroy post...
         const response = Post.destroy({
             where: { id: req.params.id },
         });
@@ -186,25 +167,18 @@ router.delete('/:id', async (req, res) => {
             message: "Post deleted successfully!",
             data: response,
         });
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
     } catch (err) {
 
         // A code-breaking error happened.
         res.status(500).json({
             message: "Post couldn't be deleted at this time.",
             data: [],
-<<<<<<< Updated upstream
-            error: err,
-        });
-=======
             error: err.message
         });
-
->>>>>>> Stashed changes
+      
     }
+  
 });
 
 module.exports = router;

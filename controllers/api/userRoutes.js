@@ -12,33 +12,21 @@ const hashPassword = async (password) => {
 
 // New User 
 router.post('/', async (req, res) => {
-    try {
-
-<<<<<<< Updated upstream
-        // Season Password...
-        req.body.password = await hashPassword(req.body.password);
-
-        // Putting the user in the oven at 380 degrees...
-=======
+    
+    try {    
+      
         // Seasoning the password...
         req.body.password = await hashPassword(req.body.password);
 
         // Creating user...
->>>>>>> Stashed changes
         const newUser = await User.create({
             username: req.body.username,
             password: req.body.password,
         });
 
-<<<<<<< Updated upstream
-        // Saving the rest for later...
-        req.session.save(() => {
-            req.session.author_id = newUser.isSoftDeleted;
-=======
         // Saving user in session.
         req.session.save(() => {
             req.session.user_id = newUser.id;
->>>>>>> Stashed changes
             req.session.logged_in = true;
             res.status(200).json(newUser);
         });
@@ -46,16 +34,14 @@ router.post('/', async (req, res) => {
 
     } catch (err) {
 
-<<<<<<< Updated upstream
         // We burn it. ):
-=======
         // A code-breaking error happened.
->>>>>>> Stashed changes
         res.status(400).json({
             message: "Failed to create user.",
             data: [],
             error: err.message
         });
+      
     }
 });
 
