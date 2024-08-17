@@ -51,4 +51,5 @@ const main = async () => {
 
 main();
 
-module.exports = { app, server };
+// For testing purposes.
+module.exports = { app, server, database };
