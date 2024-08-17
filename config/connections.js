@@ -5,13 +5,16 @@ require('dotenv').config();
 let sequelize; // Let's Sequelize!
 
 // For Render
-if(process.env.DATABASE_URL) {
+if (process.env.DATABASE_URL) {
+
+    // Connecting to database using auth URL...
     sequelize = new Sequelize(
-        process.env.DATABASE_URL,
+        process.env.DATABASE_URL, // url
         {
-            dialect: 'postgres',
+            dialect: process.env.DB_HOST,
             protocol: 'postgres',
-            dialectOptions: {
+            port: process.env.DB_PORT || 5432,
+            dialectOptions: isTest ? {} : {
                 ssl: {
                     require: true,
                     rejectUnauthorized: false // Note: Setting this to false can make the connection less secure
@@ -19,8 +22,10 @@ if(process.env.DATABASE_URL) {
             }, // To Remove SSL
         },
     );
-} else {
-    // In the case I can't use Render server
+
+} else { // In the case I can't use the online server
+
+    // Connecting to database using auth info...
     sequelize = new Sequelize(
         process.env.DB_NAME,
         process.env.DB_USER,
@@ -32,6 +37,15 @@ if(process.env.DATABASE_URL) {
 
         },
     );
+
 }
+
+// Test the connection
+sequelize.authenticate()
+    .then(() => {
+        console.log("Connection has been established successfully.");
+    }).catch(err => {
+        console.log("Unable to connect to the database: ", err.message);
+    });
 
 module.exports = sequelize;
