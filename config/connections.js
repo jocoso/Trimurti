@@ -5,15 +5,15 @@ require('dotenv').config();
 let sequelize; // Let's Sequelize!
 let db_url;
 
-// Am I in render?
+// If I am in local production
 if (process.env.NODE_ENV === 'production') {
 
-    // internal url
+    // Render url
     db_url = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
-    // postgresql://render_deploy_50dy_user:Fh6iOZJQZp1GXfxUQrkof9M3j1HzJM31@dpg-cqole80gph6c73f8c7d0-a/render_deploy_50dy
+
 } else {
 
-    // external url
+    // Local url
     db_url = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}.oregon-postgres.render.com/${process.env.DB_NAME}`;
 
 }
