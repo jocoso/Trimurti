@@ -3,9 +3,20 @@ const Sequelize = require('sequelize');
 require('dotenv').config();
 
 let sequelize; // Let's Sequelize!
+let db_url;
 
-const db_url = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+// If I am in local production
+if (process.env.NODE_ENV === 'production') {
 
+    // Render url
+    db_url = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}/${process.env.DB_NAME}`;
+
+} else {
+
+    // Local url
+    db_url = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}.oregon-postgres.render.com/${process.env.DB_NAME}`;
+
+}
 
 // Connecting to database using auth URL...
 sequelize = new Sequelize(
