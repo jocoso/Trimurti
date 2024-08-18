@@ -3,7 +3,6 @@ const Sequelize = require('sequelize');
 require('dotenv').config();
 
 let sequelize; // Let's Sequelize!
-
 let db_url;
 
 // Am I in render?
