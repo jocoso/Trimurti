@@ -1,6 +1,7 @@
-<h1> Sign Up </h1>
+
 
 {{!-- SIGN UP FORM --}}
+<h1 id="signup-mainheader">SIGN UP</h1>
 
 <form id="signup-user-form">
 
@@ -15,5 +16,23 @@
     <input type="submit" value="Sign In">
 
 </form>
+
+{{!-- LOG IN FORM --}}
+<h1 id="login-mainheader">LOG IN</h1>
+
+<form id="login-user-form">
+
+    {{!-- USERNAME --}}
+    <label for="username" name="username-login">Username</label>
+    <input type="text" id="username-login">
+    
+    {{!-- PASSWORD --}}
+    <label for="password" name="password-login">Password</label>
+    <input type="password" id="password-login">
+    
+    <input type="submit" value="Log In">
+
+</form>
+
 
  <script src="/js/auth.js"></script>
