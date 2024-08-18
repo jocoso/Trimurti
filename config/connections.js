@@ -26,7 +26,7 @@ sequelize = new Sequelize(
         protocol: 'postgres',
         dialectOptions: {
             ssl: {
-                require: true,
+                require: (process.env.NODE_ENV === 'production' ? true : process.env.DB_HOST),
                 rejectUnauthorized: false // Note: Setting this to false can make the connection less secure
             }
         }, // To Remove SSL
