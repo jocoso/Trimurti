@@ -16,4 +16,8 @@ router.use("/dash", dashRoutes);
 const authRoutes = require("./authRoutes");
 router.use("/auth", authRoutes);
 
+// POST
+const postRoutes = require('./postRoutes');
+router.use("/post", postRoutes);
+
 module.exports = router;
