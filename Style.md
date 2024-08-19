@@ -94,8 +94,7 @@
 
 ---
 
-
-As a new visitor,
+## As a new visitor,
 I want to be able to see a simple unstyled website,
 So that I can verify the website is well-structured and functional.
 Acceptance Criteria
@@ -106,8 +105,9 @@ Page Accessibility:
 The webpage loads successfully without errors when accessed via its URL.
 The load time is minimal.
 Task Completion Criteria
+
 Set-up:
-Change the HTML <title> to “Joshua’s Corner.”
+Change the HTML title to “Joshua’s Corner.”
 Add necessary meta tags for SEO and responsiveness.
 Pages:
 Create the Dashboard page and its route. 
@@ -180,26 +180,6 @@ Develop a test suite to ensure post can be updated from database successfully.
 Develop a test suite to ensure all the post can be retrieved when updatePost is called.
 Develop a test suite to ensure post will be successfully deleted from the database upon calling deletePost function.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 User Can Sign In, Log In, and Log Out
 As a new visitor,
 I want to be able to sign in, log in, and log out of the website so that I can manage my account securely and access personalized features.
@@ -234,20 +214,6 @@ Reliability:
 Test the sign-in functionality
 Test the log-in functionality
 Test the log-out functionality
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 User Form: Sign In, Log In, and Log Out
 User Story: As a new visitor to the blog,
@@ -300,86 +266,34 @@ Log Out Button:
 Implement and validate the log-out button.
 The button must only be visible when a user is logged in and must trigger the logout process correctly, with the button disappearing once the user logs out successfully.
 
+---
 
+## Posts: And Those Who Make Them
+**User Story**
+**As a** new visitor to the blog,
+**I want to** be able to click on the blogs,
+**So that I** can read the post if it is long.
 
+#### Acceptance Criteria
+> - User can click on a post.
+> - User can see a post page
+> - User can see the information from the post he clicked displayed on the page
+> - In the main post the user can see: A title, a post content, a post creator’s username and a > - date of post creation.
+> - User will be able to comment
+> - User will be able to see their comment once they press submit
+> - User will be disallowed from seeing the option to comment when logged out
 
+#### Acceptance Criteria:
+**A Blog’s Main Page:**
+- Clicking on a post will direct you to a post page.
+- In the post page, the user can see
+    - The post title
+    - The post content
+    - The post creator’s username
+    - The date created for that post.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Posts: And Those Who Make Them
-User Story
-As a new visitor to the blog,
-I want to be able to click on the blogs,
-So I can read the post if it is long.
-
-
-Acceptance Criteria:
-User can click on a post.
-User can see a post page
-User can see the information from the post he clicked displayed on the page
-In the main post the user can see: A title, a post content, a post creator’s username and a date of post creation.
-The user will be able to comment
-The user will be able to see their comment once they press submit
-The user will be disallowed from seeing the option to comment when logged out
-
-Acceptance Criteria:
-
-A Blog’s Main Page:
-Clicking on a post will direct you to a post page.
-In the post page, the user can see
-The post title
-The post content
-The post creator’s username
-The date created for that post.
-
-Comment and Subscribe:
-The post page now will have a textbox for comments.
-The textbox will only be visible if the user is logged in
-When the user press submit the box will empty and a new comment will show on the page without the need to refresh.
-The same information than the main post should be displayed in my comment
-
-
+**Comment and Subscribe:**
+- The post page now will have a textbox for comments.
+- The textbox will only be visible if the user is logged in
+- When the user press submit the box will empty and a new comment will show on the page without the need to refresh.
+- The same information than the main post should be displayed in my comment
