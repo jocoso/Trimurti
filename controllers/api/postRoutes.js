@@ -123,19 +123,19 @@ router.put("/:id", async (req, res) => {
 
         // Incorrect ID
         if (!response[0]) {
-            res.status(404).json({
+            return res.status(404).json({
                 message: "Couldn't find post.",
             });
         }
 
         // A success!
-        res.status(200).json({
+        return res.status(200).json({
             message: "Post updated successfully!",
             data: response,
         });
     } catch (err) {
         // A code-breaking error
-        res.status(500).json({
+        return res.status(500).json({
             message: "Post couldn't be updated at this time.",
             data: [],
             error: err,
@@ -155,7 +155,7 @@ router.delete("/:id", async (req, res) => {
 
         // ID is unknown
         if (!response) {
-            res.status(400).json({
+            return res.status(400).json({
                 message: "Couldn't find post.",
                 data: [],
                 error: new Error("ERROR: User not found.")
