@@ -24,12 +24,12 @@
 **I want to** be able to visit an empty website,
 **So that I** can verify that the basic hosting setup is correct and the page is accessible locally and online.
 
-#### Acceptance Criteria:
+### Acceptance Criteria:
 > - The webpage is hosted and accessible through a standard web browser.
 > - The webpage displays a plain white background with minimal content.
 > - The webpage loads successfully without errors when accessed via its URL.
 
-#### Task Completion Criteria:
+### Task Completion Criteria:
 **Initial Setup:**
 - Initialize npm and ensure it is running without issues.
 
@@ -53,8 +53,6 @@
 - Launch the website online and verify its functionality.
 - User can experience the glory of an empty website.
 
-
-
 ---
 
 ## User Can Access and View An Empty Website But Online This Time 
@@ -63,13 +61,13 @@
 **I want to** be able to go online and visit the blog,
 **So that I** can see an empty website.
 
-#### Acceptance Criteria:
-> - Page can be accessed online using an url
-> - Render can successfully communicate with github and access the repository
-> - The user will see a title render by handlebars and styled with tailwind
-> - The user will be able to go to the website using an url on any device
+### Acceptance Criteria:
+> - Page can be accessed online using an url.
+> - Render can successfully communicate with github and access the repository.
+> - The user will see a title render by handlebars and styled with tailwind.
+> - The user will be able to go to the website using an url on any device.
 
-#### Task Completion Criteria:
+### Task Completion Criteria:
 **Dependencies:**
 - Ensuring all dependencies needed such as express, express handlebars, pg, and tailwind css are installed and properly running.
 
@@ -274,23 +272,24 @@ The button must only be visible when a user is logged in and must trigger the lo
 **I want to** be able to click on the blogs,
 **So that I** can read the post if it is long.
 
-#### Acceptance Criteria
+### Acceptance Criteria
 > - User can click on a post.
-> - User can see a post page
-> - User can see the information from the post he clicked displayed on the page
-> - In the main post the user can see: A title, a post content, a post creator’s username and a > - date of post creation.
-> - User will be able to comment
-> - User will be able to see their comment once they press submit
-> - User will be disallowed from seeing the option to comment when logged out
+> - User can see a post page.
+> - User can see the information from the post he clicked displayed on the page.
+> - In the main post the user can see: A title, a post content, a post creator’s username 
+> - The date the post was created.
+> - User will be able to comment.
+> - User will be able to see their comment once they press submit.
+> - User will be disallowed from seeing the option to comment when logged out.
 
-#### Acceptance Criteria:
+### Acceptance Criteria:
 **A Blog’s Main Page:**
-- Clicking on a post will direct you to a post page.
+- Clicking on a post will direct you to a post page
 - In the post page, the user can see
     - The post title
     - The post content
     - The post creator’s username
-    - The date created for that post.
+    - The date created for that post
 
 **Comment and Subscribe:**
 - The post page now will have a textbox for comments.
