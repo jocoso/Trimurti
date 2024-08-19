@@ -2,7 +2,6 @@ const router = require('express').Router();
 const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 
-// Seasoning the password...
 const hashPassword = async (password) => {
 
     const salt = await bcrypt.genSalt(10);
@@ -13,20 +12,21 @@ const hashPassword = async (password) => {
 
 // New User 
 router.post('/', async (req, res) => {
-    try {
-
-        // Season Password...
+    
+    try {    
+      
+        // Seasoning the password...
         req.body.password = await hashPassword(req.body.password);
 
-        // Putting the user in the oven at 380 degrees...
+        // Creating user...
         const newUser = await User.create({
             username: req.body.username,
             password: req.body.password,
         });
 
-        // Saving the rest for later...
+        // Saving user in session.
         req.session.save(() => {
-            req.session.author_id = newUser.isSoftDeleted;
+            req.session.user_id = newUser.id;
             req.session.logged_in = true;
             res.status(200).json(newUser);
         });
@@ -35,17 +35,20 @@ router.post('/', async (req, res) => {
     } catch (err) {
 
         // We burn it. ):
+        // A code-breaking error happened.
         res.status(400).json({
             message: "Failed to create user.",
             data: [],
             error: err.message
         });
+      
     }
 });
 
 // Login
 router.post('/login', async (req, res) => {
 
+    console.log("I HAVE BEEN CALLED!!")
     try {
 
         // Finding user...
@@ -77,7 +80,7 @@ router.post('/login', async (req, res) => {
             });
         }
 
-        // Success! Saving the session in the store
+        // Success! Saving the session in the store.
         req.session.save(() => {
             req.session.author_id = userData.id;
             req.session.logged_in = true;
@@ -89,7 +92,7 @@ router.post('/login', async (req, res) => {
 
     } catch (err) {
 
-        // Crash
+        // A code-breaking error happened.
         res.status(500).json({
             message: "Login has failed. Please try again later...",
             data: [],
@@ -131,6 +134,47 @@ router.post('/logout', (req, res) => {
         // A more serious error
         return res.status(500).json({
             message: "An error has ocurred while trying to logout.",
+            data: [],
+            error: err.message
+        });
+
+    }
+});
+
+// // Geta All User (for testing)
+// router.get('/', async (req, res) => {
+
+// });
+
+// Delete
+router.delete('/:id', async (req, res) => {
+    try {
+
+        // Destroying user...
+        const response = User.destroy({
+            where: { id: req.params.id }
+        });
+
+        // ID is unknown
+        if (!response) {
+            return res.status(400).json({
+                message: "Couldn't find the user.",
+                data: [],
+                error: new Error("ERROR: User not found.")
+            })
+        }
+
+        // A success!
+        res.status(200).json({
+            message: "User was deleted successfully!",
+            data: response.body.data
+        });
+
+    } catch (err) {
+
+        // A code-breaking error happened.
+        res.status(500).json({
+            message: "User couldn't be deleted at this time.",
             data: [],
             error: err.message
         });

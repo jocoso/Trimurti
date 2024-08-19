@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -10,39 +12,66 @@
 
 <body>
     <main>
-        <div id="header">
-            {{! Title }}
 
+
+        <div id="header">
+
+            {{! Title }}
             <h1 id="title">
                 Joshua's Corner
             </h1>
 
             {{! Navbar }}
-
             <ul id="navbar">
+
                 <li>
                     <a href="/">
                         Home
                     </a>
                 </li>
+
                 <li>
                     <a href="/dash">
                         Dashboard
                     </a>
                 </li>
-                <li>
-                    <a href="/auth">
-                        Login
-                    </a>
-                </li>
+
+                <!-- if the user has logged in -->
+                {{#if logged_in}}
+
+                {{! Present them with the option to leave. }}
+                <button id="logout-button">
+                    Log Out
+                </button>
+
+                {{else}}
+
+
+                <button id="login-button">
+                    Log In
+                </button>
+
+
+                {{/if}}
+
             </ul>
 
         </div>
+
+        {{!-- CONTENT --}}
         <div id="content">
+
             {{! Body of the page for content }}
             {{{body}}}
+
         </div>
+
+        {{#if error}}
+        <p class="error">{{error}}</p>
+        {{/if}}
     </main>
+    <script src="/js/main.js"></script>
 </body>
+
 
 </html>
