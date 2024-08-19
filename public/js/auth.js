@@ -1,8 +1,8 @@
 
 // POST REQUEST TO API/USER
-const signUpHandler = async (evt) => {
+const signUpHandler = async (event) => {
 
-    evt.preventDefault();
+    event.preventDefault();
 
     // Extracting user input...
     const username = document.querySelector('#username-signup').value.trim();
@@ -30,9 +30,9 @@ const signUpHandler = async (evt) => {
 }
 
 // POST REQUEST TO API/USER/LOGIN
-const loginHandler = async (evt) => {
+const loginHandler = async (event) => {
 
-    evt.preventDefault();
+    event.preventDefault();
 
     // Extracting user input...
     const username = document.querySelector('#username-login').value.trim();
@@ -48,10 +48,12 @@ const loginHandler = async (evt) => {
         });
 
         if (response.ok) { // Data was received...
-            document.location.replace('/'); // We send the user to homepage
-            console.log("- Congrats! You successfully Log in -");
+
+            setTimeout(() => {document.location.replace('/')}, 100); // We send the user to homepage
+            return;
+
         } else {
-            console.log("- Forbidden Login -", response);
+            console.log("- Forbidden Login -");
         }
 
     } else {
@@ -60,5 +62,5 @@ const loginHandler = async (evt) => {
 }
 
 // Connecting form submission with function
-document.querySelector('#signup-user-form').addEventListener('submit', signUpHandler);
-document.querySelector('#login-user-form').addEventListener('submit', loginHandler);
+document.querySelector('#signup-user-form').addEventListener('submit', (e) => signUpHandler(e));
+document.querySelector('#login-user-form').addEventListener('submit', (e) => loginHandler(e));
