@@ -7,7 +7,13 @@ const { Post, User } = require('../../models')
 router.post('/', async (req, res) => {
 
     try {
-        
+
+        // Creating Post
+        const response = await Post.create({
+            ...req.body,
+            user_id: req.session.user_id,
+        });
+
         // Retrieving important information about the post and its author...
         const { title, content } = req.body;
         const author_id = req.session.author_id;
@@ -91,7 +97,7 @@ router.get("/:id", async (req, res) => {
         }
 
         // Post was found
-        return res.status(200).json({
+        res.status(200).json({
             message: "Post successfully retrieved.",
             data: post,
         });
