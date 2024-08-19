@@ -1,4 +1,38 @@
+{{! POST DATA }}
 <h3>{{post.title}}</h3>
 <p>{{post.content}}</p>
 <p>{{post.User.username}}</p>
 <p>{{post.date_of_creation}}</p>
+
+{{! COMMENT SECTION }}
+<h1> Comment Session </h1>
+{{#each comments}}
+
+    {{! COMMENT TEMPLATE }}
+    <div>
+        <h1>{{this.title}}</h1>
+
+        <p>{{this.content}}</p>
+
+        <p>Created on: {{this.date_of_creation}}</p>
+
+        <p>Username: {{this.User.username}}</p>
+    </div>
+
+{{/each}}
+
+{{#if logged_in}}
+
+    {{! COMMENT SECTION }}
+    <textarea id="comment-content" rows="7" cols="70">
+    </textarea>
+    <button id="comment-submit">
+        Submit Comment
+    </button>
+{{else}}
+    <div id="nologin-errorbox">
+        You need to be registered to post.
+    </div>
+{{/if}}
+
+<script src="/js/post.js"></script>
