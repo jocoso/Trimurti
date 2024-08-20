@@ -97,6 +97,7 @@
 
 ## As a new visitor,
 ## As a new visitor,
+## As a new visitor,
 I want to be able to see a simple unstyled website,
 So that I can verify the website is well-structured and functional.
 Acceptance Criteria
@@ -109,7 +110,9 @@ The load time is minimal.
 Task Completion Criteria
 
 
+
 Set-up:
+Change the HTML title to “Joshua’s Corner.”
 Change the HTML title to “Joshua’s Corner.”
 Change the HTML title to “Joshua’s Corner.”
 Add necessary meta tags for SEO and responsiveness.
@@ -270,6 +273,13 @@ Log Out Button:
 Implement and validate the log-out button.
 The button must only be visible when a user is logged in and must trigger the logout process correctly, with the button disappearing once the user logs out successfully.
 
+---
+
+## Posts: And Those Who Make Them
+**User Story**
+**As a** new visitor to the blog,
+**I want to** be able to click on the blogs,
+**So that I** can read the post if it is long.
 ---
 
 ## Posts: And Those Who Make Them
