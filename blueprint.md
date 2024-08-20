@@ -2,7 +2,7 @@
 
 ---
 
-**Last Updated:** 8/19/2024 
+**Last Updated:** 8/20/2024 
 
 ---
 
@@ -14,7 +14,8 @@
 |:-----------------:|:---------:|
 | Set-up            | yes       |
 | Skeleton          | yes       |
-| Post Back End     | yes        |
+| Post Back End     | yes       |
+| Dashboard         | no        |
 
 ---
 
@@ -330,4 +331,4 @@ The button must only be visible when a user is logged in and must trigger the lo
 
 **Just a Button:**
 - The user can see a button located at the bottom of the dashboard.
-- When clicked by the user, it will print in the console 'I was clicked.'
+- When clicked by the user, it will print in the console 'I was clicked.'git 
