@@ -1,47 +1,42 @@
 // Post
+const router = require("express").Router();
+const { Post, User, Comment } = require("../../models");
 
-const router = require('express').Router();
-const { Post, User } = require('../../models')
-
-// Add a new Post
-router.post('/', async (req, res) => {
-
+// Add a new Comment
+router.post("/", async (req, res) => {
     try {
-        
-        // Retrieving important information about the post and its author...
-        const { title, content } = req.body;
-        const author_id = req.session.author_id;
+        const { title, content, blog_id } = req.body;
 
-        // Only registered users can post
-        if (!author_id) {
+        if (!req.session.author_id) {
             return res
                 .status(403) // Forbidden
                 .json({
-                    message: "Only registered users may post.",
+                    message: "Only registered users may comment.",
                     data: [],
                     error: "- Unauthorized User -",
                 });
         }
-
-        const newPost = await Post.create({ title, content, author_id });
-
-        // Post Created without errors.
-        res.status(200).json({
-            message: "Post successfully created",
-            data: newPost.toJSON(),
+        // Creating comment
+        const newComment = await Comment.create({
+            title,
+            content,
+            author_id: req.session.author_id,
+            blog_id,
         });
 
+        // Comment Created without errors.
+        res.status(200).json({
+            message: "Comment successfully created",
+            data: newComment.toJSON(),
+        });
     } catch (err) {
-
         // Code-Breaking error
         res.status(400).json({
-            message: "Post couldn't be created.",
+            message: "Comment couldn't be created.",
             data: [],
             error: err.message,
         });
-
     }
-
 });
 
 // Get All Posts (Mostly for testing)
@@ -74,31 +69,32 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Get Post By ID (Mostly for testing)
-router.get("/:id", async (req, res) => {
+// Get Comment By Blog ID (Mostly for testing)
+router.get("/:blog_id", async (req, res) => {
     try {
         // Getting by Primary Key
-        const post = await Post.findByPk(req.params.id, {
-            include: [{ model: User, attributes: ["username"] }],
+        const comments = await Comment.findAll({
+            where: { blog_id: req.params.blog_id },
         });
 
-        // Incorrect ID
-        if (!post) {
+        // No comments found for the given blog_id
+        if (!comments.length) {
             return res.status(404).json({
-                message: "Couldn't find the post",
+                message: "No comments found for this post.",
                 data: [],
             });
         }
 
-        // Post was found
-        return res.status(200).json({
-            message: "Post successfully retrieved.",
-            data: post,
+        // Comments were found
+        res.status(200).json({
+            message: "Comments successfully retrieved.",
+            data: comments,
         });
+
     } catch (err) {
         // A code-breaking error
         res.status(400).json({
-            message: "Post couldn't be retrieved at this time",
+            message: "Comments couldn't be retrieved at this time",
             data: [],
             error: err.message,
         });
@@ -139,9 +135,7 @@ router.put("/:id", async (req, res) => {
 
 // Delete a Post
 router.delete("/:id", async (req, res) => {
-  
     try {
-       
         // Destroy post...
         const response = Post.destroy({
             where: { id: req.params.id },
@@ -152,7 +146,7 @@ router.delete("/:id", async (req, res) => {
             return res.status(400).json({
                 message: "Couldn't find post.",
                 data: [],
-                error: new Error("ERROR: User not found.")
+                error: new Error("ERROR: User not found."),
             });
         }
 
@@ -161,18 +155,14 @@ router.delete("/:id", async (req, res) => {
             message: "Post deleted successfully!",
             data: response,
         });
-
     } catch (err) {
-
         // A code-breaking error happened.
         res.status(500).json({
             message: "Post couldn't be deleted at this time.",
             data: [],
-            error: err.message
+            error: err.message,
         });
-      
     }
-  
 });
 
 module.exports = router;
