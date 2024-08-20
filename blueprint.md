@@ -2,7 +2,7 @@
 
 ---
 
-**Last Updated:** 8/19/2024 
+**Last Updated:** 8/20/2024 
 
 ---
 
@@ -14,7 +14,8 @@
 |:-----------------:|:---------:|
 | Set-up            | yes       |
 | Skeleton          | yes       |
-| Post Back End     | yes        |
+| Post Back End     | yes       |
+| Dashboard         | no        |
 
 ---
 
@@ -96,6 +97,7 @@
 
 ## As a new visitor,
 ## As a new visitor,
+## As a new visitor,
 I want to be able to see a simple unstyled website,
 So that I can verify the website is well-structured and functional.
 Acceptance Criteria
@@ -108,7 +110,9 @@ The load time is minimal.
 Task Completion Criteria
 
 
+
 Set-up:
+Change the HTML title to “Joshua’s Corner.”
 Change the HTML title to “Joshua’s Corner.”
 Change the HTML title to “Joshua’s Corner.”
 Add necessary meta tags for SEO and responsiveness.
@@ -283,6 +287,13 @@ The button must only be visible when a user is logged in and must trigger the lo
 **As a** new visitor to the blog,
 **I want to** be able to click on the blogs,
 **So that I** can read the post if it is long.
+---
+
+## Posts: And Those Who Make Them
+**User Story**
+**As a** new visitor to the blog,
+**I want to** be able to click on the blogs,
+**So that I** can read the post if it is long.
 
 #### Acceptance Criteria
 > - User can click on a post.
@@ -330,4 +341,4 @@ The button must only be visible when a user is logged in and must trigger the lo
 
 **Just a Button:**
 - The user can see a button located at the bottom of the dashboard.
-- When clicked by the user, it will print in the console 'I was clicked.'
+- When clicked by the user, it will print in the console 'I was clicked.'git 
