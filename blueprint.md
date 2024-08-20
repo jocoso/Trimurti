@@ -280,20 +280,6 @@ The button must only be visible when a user is logged in and must trigger the lo
 **As a** new visitor to the blog,
 **I want to** be able to click on the blogs,
 **So that I** can read the post if it is long.
----
-
-## Posts: And Those Who Make Them
-**User Story**
-**As a** new visitor to the blog,
-**I want to** be able to click on the blogs,
-**So that I** can read the post if it is long.
----
-
-## Posts: And Those Who Make Them
-**User Story**
-**As a** new visitor to the blog,
-**I want to** be able to click on the blogs,
-**So that I** can read the post if it is long.
 
 #### Acceptance Criteria
 > - User can click on a post.
@@ -324,21 +310,21 @@ The button must only be visible when a user is logged in and must trigger the lo
 ## Posts: Dashboard
 **User Story**
 **As a** new visitor to the blog,
-**I want to** be able to click 'Dashboard' in the navigation menu,
-**So that I** can see the post I have created, given the option to create a new blog post.
+**I want to** be able to click the 'Dashboard' link in the navigation menu,
+**So that I** can see the post I have created and to create a new blog post.
 
 ### Acceptance Criteria
 > - The user can access the dashboard by using the navbar.
-> - In the dashboard section, the user can see all the post they have created if they have logged in.
-> - The user can see a button in the dashboard that reads: 'Add a Post'.
+> - The user can see all the posts they have created if they have logged in.
+> - The user can see and click on a button in the dashboard that reads: 'Add a Post'.
 
 ### Acceptance Criteria:
 **Fetching Posts:**
 - The user can see all the post they have ever created.
 - If the user is not logged in, they will see a message that reads 'You need to login to see your posts.'
-- Push and Merged without issues.
+- Push and Merged.
 - Works in Render.
 
 **Just a Button:**
 - The user can see a button located at the bottom of the dashboard.
-- When clicked by the user, it will print in the console 'I was clicked.'git 
+- When clicked by the user, it will print in the console: 'I was clicked.'
