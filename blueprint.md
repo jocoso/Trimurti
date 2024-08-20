@@ -95,6 +95,7 @@
 ---
 
 ## As a new visitor,
+## As a new visitor,
 I want to be able to see a simple unstyled website,
 So that I can verify the website is well-structured and functional.
 Acceptance Criteria
@@ -106,7 +107,9 @@ The webpage loads successfully without errors when accessed via its URL.
 The load time is minimal.
 Task Completion Criteria
 
+
 Set-up:
+Change the HTML title to “Joshua’s Corner.”
 Change the HTML title to “Joshua’s Corner.”
 Add necessary meta tags for SEO and responsiveness.
 Pages:
@@ -273,6 +276,13 @@ The button must only be visible when a user is logged in and must trigger the lo
 **As a** new visitor to the blog,
 **I want to** be able to click on the blogs,
 **So that I** can read the post if it is long.
+---
+
+## Posts: And Those Who Make Them
+**User Story**
+**As a** new visitor to the blog,
+**I want to** be able to click on the blogs,
+**So that I** can read the post if it is long.
 
 #### Acceptance Criteria
 > - User can click on a post.
@@ -297,3 +307,27 @@ The button must only be visible when a user is logged in and must trigger the lo
 - The textbox will only be visible if the user is logged in
 - When the user press submit the box will empty and a new comment will show on the page without the need to refresh.
 - The same information than the main post should be displayed in my comment
+
+---
+
+## Posts: Dashboard
+**User Story**
+**As a** new visitor to the blog,
+**I want to** be able to click 'Dashboard' in the navigation menu,
+**So that I** can see the post I have created, given the option to create a new blog post.
+
+### Acceptance Criteria
+> - The user can access the dashboard by using the navbar.
+> - In the dashboard section, the user can see all the post they have created if they have logged in.
+> - The user can see a button in the dashboard that reads: 'Add a Post'.
+
+### Acceptance Criteria:
+**Fetching Posts:**
+- The user can see all the post they have ever created.
+- If the user is not logged in, they will see a message that reads 'You need to login to see your posts.'
+- Push and Merged without issues.
+- Works in Render.
+
+**Just a Button:**
+- The user can see a button located at the bottom of the dashboard.
+- When clicked by the user, it will print in the console 'I was clicked.'
