@@ -1,1 +1,15 @@
 <h1>Dashboard</h1>
+
+{{#each outData}}
+{{!-- {{@index}}: {{this}}
+
+{{}} --}}
+
+{{#if this.error}}
+<h1>{{this.error}}</h1>
+{{else}}
+<h1>{{this.title}}</h1>
+<p>{{this.content}}</p>
+{{/if}}
+
+{{/each}}
