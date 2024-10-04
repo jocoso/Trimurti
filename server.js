@@ -2,12 +2,15 @@
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
+
+const helpers = require('./utils/helpers');
+const controllers = require('./controllers');
 const Database = require('./connections/connections');
 
 // FILES
-const controllers = require('./controllers');
 const database = require("./config/connections");
-const helpers = require("./utils/helpers");
+const controllers = require("./controllers");
+
 require('dotenv').config();
 
 // SESSION
