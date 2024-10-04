@@ -27,7 +27,6 @@ router.post("/", async (req, res) => {
             res.status(200).json(newUser);
         });
     } catch (err) {
-        // We burn it. ):
         // A code-breaking error happened.
         res.status(400).json({
             message: "Failed to create user.",
@@ -101,8 +100,6 @@ router.post("/logout", (req, res) => {
             });
         } else {
             // If no active session
-
-            // Complain
             return res.status(400).json({
                 message: "No session to log out from.",
                 data: [],
@@ -112,28 +109,23 @@ router.post("/logout", (req, res) => {
     } catch (err) {
         // A more serious error
         return res.status(500).json({
-            message: "An error has ocurred while trying to logout.",
+            message: "An error has occurred while trying to log out.",
             data: [],
             error: err.message,
         });
     }
 });
 
-// // Geta All User (for testing)
-// router.get('/', async (req, res) => {
-
-// });
-
-// Delete
+// Delete User
 router.delete("/:id", async (req, res) => {
     try {
         // Destroying user...
-        const response = User.destroy({
+        const response = await User.destroy({
             where: { id: req.params.id },
         });
 
         // ID is unknown
-        if (!response) {
+        if (response === 0) {
             return res.status(400).json({
                 message: "Couldn't find the user.",
                 data: [],
@@ -144,7 +136,7 @@ router.delete("/:id", async (req, res) => {
         // A success!
         res.status(200).json({
             message: "User was deleted successfully!",
-            data: response.body.data,
+            data: response, // Will return the number of rows affected (1 if successful)
         });
     } catch (err) {
         // A code-breaking error happened.
