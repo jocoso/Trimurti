@@ -66,7 +66,7 @@ const postHandler = async (e) => {
                 document.querySelector("#post-title-submit").value = ""; // Corrected selector
                 document.querySelector("#post-content").value = "";
 
-                // Reload page after a short delay to update the comment section
+                // Reload page after a short delay to update the post section
                 setTimeout(() => {
                     document.location.reload();
                 }, 100);
