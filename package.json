@@ -22,6 +22,11 @@
   },
   "homepage": "https://github.com/jocoso/a-random-blog#readme",
   "dependencies": {
+<<<<<<< HEAD
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-handlebars": "^8.0.1",
+=======
     "bcrypt": "^5.1.1",
     "connect-session-sequelize": "^7.1.7",
     "dotenv": "^16.4.5",
@@ -29,6 +34,7 @@
     "express-handlebars": "^8.0.1",
     "express-session": "^1.18.0",
     "node-fetch": "^3.3.2",
+>>>>>>> df066bd4f3cd07381f520d420fc6ab82039d3cd9
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "postgres": "^3.4.4",
