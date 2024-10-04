@@ -2,26 +2,33 @@
 
 {{#each posts}}
 
-{{!-- POST TEMPLATE --}}
+    {{! POST TEMPLATE }}
 
-<div class="post-template bg-white shadow-md rounded-lg p-6 mb-8" data-id="{{this.id}}">
-    <header class="post-header mb-4">
-        <div class="post-title text-2xl font-semibold text-gray-900">
-            {{this.title}}
+    <div
+        class="post-template bg-white shadow-md rounded-lg p-6 mb-8"
+        data-id="{{this.id}}"
+    >
+        <header class="post-header mb-4">
+            <div class="post-title text-2xl font-semibold text-gray-900">
+                {{this.title}}
+            </div>
+            <p class="post-data text-gray-600 text-sm">
+                Posted by:
+                <span class="text-indigo-500 font-medium">{{this.author}}</span>
+                on
+                <span class="text-indigo-400">{{this.date_of_creation}}</span>
+            </p>
+        </header>
+
+        <div class="post-body">
+            <p class="post-displayContent text-gray-800 leading-relaxed">
+                {{this.content}}
+            </p>
         </div>
-        <p class="post-data text-gray-600 text-sm">
-            Posted by: <span class="text-indigo-500 font-medium">{{this.author}}</span>
-            on <span class="text-indigo-400">{{this.date_of_creation}}</span>
-        </p>
-    </header>
-
-    <div class="post-body">
-        <p class="post-displayContent text-gray-800 leading-relaxed">
-            {{this.content}}
-        </p>
     </div>
-</div>
-
 {{/each}}
+{{#if logged_in}}
+    <a href="/post/newpost" id="newpostlink" class="cursor-pointer">Add a New Post</a>
+{{/if}}
 
 <script src="/js/home.js"></script>
