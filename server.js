@@ -3,8 +3,6 @@ const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
 const Database = require('./connections/connections');
-=======
->>>>>>> df066bd4f3cd07381f520d420fc6ab82039d3cd9
 
 // FILES
 const controllers = require('./controllers');
