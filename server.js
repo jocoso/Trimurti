@@ -1,7 +1,14 @@
 // EXT LIBS
-const path = require("path");
-const express = require("express");
-const exphbs = require("express-handlebars");
+const path = require('path');
+const express = require('express');
+const exphbs = require('express-handlebars');
+<<<<<<< HEAD
+const helpers = require('./utils/helpers');
+const path = require('path');
+const controllers = require('./controllers');
+const Database = require('./connections/connections');
+=======
+>>>>>>> df066bd4f3cd07381f520d420fc6ab82039d3cd9
 
 // FILES
 const database = require("./config/connections");

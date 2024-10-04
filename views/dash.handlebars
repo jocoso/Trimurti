@@ -1,1 +1,21 @@
 <h1>Dashboard</h1>
+
+{{#each outData}}
+{{!-- Either display blog or an error --}}
+{{#if this.error}}
+<h1>{{this.error}}</h1>
+{{else}}
+<h1>{{this.title}}</h1>
+<p>{{this.content}}</p>
+{{/if}}
+
+{{/each}}
+
+{{!-- Add post button --}}
+{{#if logged_in}}
+<button id="add-post-button">
+    Add A Post
+</button>
+{{/if}}
+
+<script src="/js/dash.js"></script>
