@@ -1,6 +1,7 @@
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const database = require('./connections');
+require('dotenv').config();
 
 const sessionConf = session({
 

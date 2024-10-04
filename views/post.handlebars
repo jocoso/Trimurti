@@ -1,38 +1,65 @@
 {{! POST DATA }}
-<h3>{{post.title}}</h3>
-<p>{{post.content}}</p>
-<p>{{post.User.username}}</p>
-<p>{{post.date_of_creation}}</p>
+<div class="bg-white shadow-md rounded-lg p-6 mb-8">
+    <h3 class="text-3xl font-bold text-indigo-600 mb-4">{{post.title}}</h3>
+    <p class="text-gray-800 leading-relaxed mb-4">{{post.content}}</p>
+    <p class="text-sm text-gray-600 mb-2">Posted by:
+        <span class="font-medium text-indigo-500">{{post.User.username}}</span>
+    </p>
+    <p class="text-sm text-gray-500">Created on: {{post.date_of_creation}}</p>
+</div>
 
 {{! COMMENT SECTION }}
-<h1> Comment Session </h1>
-{{#each comments}}
+<div class="bg-gray-100 shadow-sm rounded-lg p-6 mb-8">
+    <h1 class="text-2xl font-semibold text-green-600 mb-6">Comment Section</h1>
 
-    {{! COMMENT TEMPLATE }}
-    <div>
-        <h1>{{this.title}}</h1>
+    {{#if comments.length}}
+        {{! Display each comment }}
+        {{#each comments}}
+            <div class="bg-white shadow-sm rounded-lg p-4 mb-4">
+                <h2 class="text-lg font-bold text-gray-800">{{this.title}}</h2>
+                <p
+                    class="text-gray-700 leading-relaxed mb-2"
+                >{{this.content}}</p>
+                <p class="text-sm text-gray-500">Created on:
+                    {{this.date_of_creation}}</p>
+                <p class="text-sm text-gray-600">Username:
+                    <span
+                        class="font-medium text-indigo-500"
+                    >{{this.User.username}}</span>
+                </p>
+            </div>
+        {{/each}}
+    {{else}}
+        <p class="text-sm text-gray-600">No comments yet. Be the first to
+            comment!</p>
+    {{/if}}
 
-        <p>{{this.content}}</p>
-
-        <p>Created on: {{this.date_of_creation}}</p>
-
-        <p>Username: {{this.User.username}}</p>
-    </div>
-
-{{/each}}
-
-{{#if logged_in}}
-
-    {{! COMMENT SECTION }}
-    <textarea id="comment-content" rows="7" cols="70">
-    </textarea>
-    <button id="comment-submit">
-        Submit Comment
-    </button>
-{{else}}
-    <div id="nologin-errorbox">
-        You need to be registered to post.
-    </div>
-{{/if}}
+    {{! Comment form for logged-in users }}
+    {{#if logged_in}}
+        <div class="mt-6">
+            <input
+                type="text"
+                id="title-submit"
+                class="w-full p-3 mb-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Comment title"
+            />
+            <textarea
+                id="comment-content"
+                rows="4"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Write your comment..."
+            ></textarea>
+            <button
+                id="comment-submit"
+                class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300"
+            >Submit Comment</button>
+        </div>
+    {{else}}
+        <div
+            id="nologin-errorbox"
+            class="mt-6 text-center text-red-600 font-semibold"
+        >You need to be registered to post.</div>
+    {{/if}}
+</div>
 
 <script src="/js/post.js"></script>

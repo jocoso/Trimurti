@@ -2,7 +2,7 @@
 
 ---
 
-**Last Updated:** 8/19/2024 
+**Last Updated:** 8/19/2024
 
 ---
 
@@ -10,11 +10,11 @@
 
 ### Website objectives
 
-| Objective         | Completed |
-|:-----------------:|:---------:|
-| Set-up            | yes       |
-| Skeleton          | yes       |
-| Post Back End     | yes        |
+|   Objective   | Completed |
+| :-----------: | :-------: |
+|    Set-up    |    yes    |
+|   Skeleton   |    yes    |
+| Post Back End |    yes    |
 
 ---
 
@@ -25,29 +25,36 @@
 **So that I** can verify that the basic hosting setup is correct and the page is accessible locally and online.
 
 ### Acceptance Criteria:
+
 > - The webpage is hosted and accessible through a standard web browser.
 > - The webpage displays a plain white background with minimal content.
 > - The webpage loads successfully without errors when accessed via its URL.
 
 ### Task Completion Criteria:
+
 **Initial Setup:**
+
 - Initialize npm and ensure it is running without issues.
 
 **Dependencies:**
+
 - Install express, express-handlebars, and pg.
 
 **Server Configuration:**
+
 - Set up server.js file.
 - Configure Handlebars in the server.
 - Create a basic Handlebars template and a homepage.
 
 **Finalizing The Setup**
+
 - Configure Express to serve static files from the public folder.
 - Configure Tailwind CSS.
 - Ensure everything is working by running node server.js.
 - Open a web browser and navigate to http://localhost:3001 to check that all functions as expected.
 
 **Deployment:**
+
 - Set up a new project on Render and connect it to the GitHub repository.
 - Configure deployment settings according to the Node.js environment.
 - Launch the website online and verify its functionality.
@@ -55,36 +62,42 @@
 
 ---
 
-## User Can Access and View An Empty Website But Online This Time 
+## User Can Access and View An Empty Website But Online This Time
 
 **As a** new visitor,
 **I want to** be able to go online and visit the blog,
 **So that I** can see an empty website.
 
 ### Acceptance Criteria:
+
 > - Page can be accessed online using an url.
 > - Render can successfully communicate with github and access the repository.
 > - The user will see a title render by handlebars and styled with tailwind.
 > - The user will be able to go to the website using an url on any device.
 
 ### Task Completion Criteria:
+
 **Dependencies:**
+
 - Ensuring all dependencies needed such as express, express handlebars, pg, and tailwind css are installed and properly running.
 
 **Server Configuration:**
+
 - Install and set up the server.js file the server.js should:
-    - Setup and configure ***Express***
-    - Setup and configure ***Handlebars***
-    - Implements future controllers and middlewares
-    - listen to the port 3001 without errors
+  - Setup and configure ***Express***
+  - Setup and configure ***Handlebars***
+  - Implements future controllers and middlewares
+  - listen to the port 3001 without errors
 
 **Finalizing Setup:**
+
 - Create a basic Handlebars template and a homepage
 - Configure Express further to serve static files from the public folder
 - Implementing Tailwind CSS as a test
 - Running **server.js** without errors
 
 **Deployment:**
+
 - Link Render to the repository
 - The website is configured to communicate effectively with a hosting site
 - Website has a green from Render
@@ -93,6 +106,7 @@
 ---
 
 ## As a new visitor,
+
 I want to be able to see a simple unstyled website,
 So that I can verify the website is well-structured and functional.
 Acceptance Criteria
@@ -108,9 +122,9 @@ Set-up:
 Change the HTML title to “Joshua’s Corner.”
 Add necessary meta tags for SEO and responsiveness.
 Pages:
-Create the Dashboard page and its route. 
-Create the Log page and its route. 
-Test that each url links to the proper page. 
+Create the Dashboard page and its route.
+Create the Log page and its route.
+Test that each url links to the proper page.
 Root Structure:
 Establish a root structure in the main Handlebars template.
 Add a header section inside the root.
@@ -130,11 +144,6 @@ Create a mockup blog entry.
 Include a title.
 Display “posted by: User” on [DATE] line with today's real date.
 Include a body paragraph of Lorem Ipsum.
-
-
-
-
-
 
 User Can See All the Posts in the Database
 As a new visitor,
@@ -171,7 +180,7 @@ Implement a function to retrieve all posts from the database and return them as 
 Delete Post:
 Create a function that deletes a post from the database given its id.
 Test Post:
-Develop a test suite to ensure the translator correctly formats data for the website and its author. 
+Develop a test suite to ensure the translator correctly formats data for the website and its author.
 Develop a test suite to ensure posts will successfully success and fail when expected.
 Develop a test suite to ensure post can be retrieved from database successfully.
 Develop a test suite to ensure post can be updated from database successfully.
@@ -266,32 +275,70 @@ The button must only be visible when a user is logged in and must trigger the lo
 
 ---
 
+## The Rest Of Them
+
+**User Story**
+**As a** registered visitor to the blog,
+**I want to** be able to click on the blog button,
+**So that I** can add a new post.
+
+### Acceptance Criteria
+
+> - When clicking the 'Add Post' button the user will be prompted to enter a title and the content.
+> - The input will return an error if the user input is incorrect.
+> - The website should successfully post the new blog post to the database and refresh the page for the user to see their newly created post.
+> - When the user click at their post they can choose if to click
+
+### Acceptance Criteria:
+
+**A Blog’s Main Page:**
+
+- Clicking on a post will direct you to a post page
+- In the post page, the user can see
+  - The post title
+  - The post content
+  - The post creator’s username
+  - The date created for that post
+
+**Comment and Subscribe:**
+
+- The post page now will have a textbox for comments.
+- The textbox will only be visible if the user is logged in
+- When the user press submit the box will empty and a new comment will show on the page without the need to refresh.
+- The same information than the main post should be displayed in my comment
+
+
 ## Posts: And Those Who Make Them
+
 **User Story**
 **As a** new visitor to the blog,
 **I want to** be able to click on the blogs,
 **So that I** can read the post if it is long.
 
 ### Acceptance Criteria
+
 > - User can click on a post.
 > - User can see a post page.
 > - User can see the information from the post he clicked displayed on the page.
-> - In the main post the user can see: A title, a post content, a post creator’s username 
+> - In the main post the user can see: A title, a post content, a post creator’s username
 > - The date the post was created.
 > - User will be able to comment.
 > - User will be able to see their comment once they press submit.
 > - User will be disallowed from seeing the option to comment when logged out.
 
 ### Acceptance Criteria:
+
 **A Blog’s Main Page:**
+
 - Clicking on a post will direct you to a post page
 - In the post page, the user can see
-    - The post title
-    - The post content
-    - The post creator’s username
-    - The date created for that post
+  - The post title
+  - The post content
+  - The post creator’s username
+  - The date created for that post
 
 **Comment and Subscribe:**
+
 - The post page now will have a textbox for comments.
 - The textbox will only be visible if the user is logged in
 - When the user press submit the box will empty and a new comment will show on the page without the need to refresh.

@@ -1,29 +1,27 @@
-<h1>Homepage</h1>
+<h1 class="text-4xl font-bold text-center text-indigo-600 mb-8">Homepage</h1>
 
 {{#each posts}}
 
 {{!-- POST TEMPLATE --}}
 
-<div class="post-template" data-id="{{this.id}}">
-
-    <header class="post-header">
-        <div class="post-title">
+<div class="post-template bg-white shadow-md rounded-lg p-6 mb-8" data-id="{{this.id}}">
+    <header class="post-header mb-4">
+        <div class="post-title text-2xl font-semibold text-gray-900">
             {{this.title}}
         </div>
-        <p class="post-data">
-            Posted by:
-            {{this.author}}
-            on
-            {{this.date_of_creation}}
+        <p class="post-data text-gray-600 text-sm">
+            Posted by: <span class="text-indigo-500 font-medium">{{this.author}}</span>
+            on <span class="text-indigo-400">{{this.date_of_creation}}</span>
         </p>
     </header>
 
     <div class="post-body">
-        <p class="post-displayContent">
+        <p class="post-displayContent text-gray-800 leading-relaxed">
             {{this.content}}
         </p>
     </div>
 </div>
+
 {{/each}}
 
- <script src="/js/home.js"></script>
+<script src="/js/home.js"></script>

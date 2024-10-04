@@ -10,68 +10,59 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 </head>
 
-<body>
-    <main>
+<body class="bg-gray-100 text-gray-900 font-sans">
 
-
-        <div id="header">
-
-            {{! Title }}
-            <h1 id="title">
+    <main class="container mx-auto p-6">
+        <!-- Header Section -->
+        <div id="header" class="text-center mb-10">
+            <!-- Title -->
+            <h1 id="title" class="text-4xl font-bold text-indigo-600">
                 Joshua's Corner
             </h1>
 
-            {{! Navbar }}
-            <ul id="navbar">
-
+            <!-- Navbar -->
+            <ul id="navbar" class="flex justify-center mt-6 space-x-6">
                 <li>
-                    <a href="/">
-                        Home
-                    </a>
+                    <a href="/" class="text-gray-700 hover:text-indigo-600 text-lg">Home</a>
                 </li>
-
                 <li>
-                    <a href="/dash">
-                        Dashboard
-                    </a>
+                    <a href="/dash" class="text-gray-700 hover:text-indigo-600 text-lg">Dashboard</a>
                 </li>
 
                 <!-- if the user has logged in -->
                 {{#if logged_in}}
-
-                {{! Present them with the option to leave. }}
-                <button id="logout-button">
-                    Log Out
-                </button>
-
+                <li>
+                    <!-- Logout Button -->
+                    <button id="logout-button"
+                        class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300">
+                        Log Out
+                    </button>
+                </li>
                 {{else}}
-
-
-                <button id="login-button">
-                    Log In
-                </button>
-
-
+                <li>
+                    <!-- Login Button -->
+                    <button id="login-button"
+                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition duration-300">
+                        Log In
+                    </button>
+                </li>
                 {{/if}}
-
             </ul>
-
         </div>
 
-        {{!-- CONTENT --}}
-        <div id="content">
-
-            {{! Body of the page for content }}
+        <!-- Content Section -->
+        <div id="content" class="bg-white shadow-md rounded-lg p-6">
+            <!-- Body of the page for content -->
             {{{body}}}
-
         </div>
 
+        <!-- Error Message -->
         {{#if error}}
-        <p class="error">{{error}}</p>
+        <p class="error text-red-500 text-center mt-4">{{error}}</p>
         {{/if}}
     </main>
+
     <script src="/js/main.js"></script>
 </body>
-
 
 </html>
