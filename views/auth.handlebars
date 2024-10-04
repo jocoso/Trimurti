@@ -1,38 +1,47 @@
-
-
 {{!-- SIGN UP FORM --}}
-<h1 id="signup-mainheader">SIGN UP</h1>
+<div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6 mb-8">
+    <h1 id="signup-mainheader" class="text-2xl font-bold text-center text-indigo-600 mb-6">SIGN UP</h1>
 
-<form id="signup-user-form">
+    <form id="signup-user-form" class="space-y-4">
+        {{!-- USERNAME --}}
+        <div>
+            <label for="username-signup" class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" id="username-signup" name="username-signup" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
 
-    {{!-- USERNAME --}}
-    <label for="username" name="username-signup">Username</label>
-    <input type="text" id="username-signup">
-    
-    {{!-- PASSWORD --}}
-    <label for="password" name="password-signup">Password</label>
-    <input type="password" id="password-signup">
-    
-    <input type="submit" value="Sign In">
+        {{!-- PASSWORD --}}
+        <div>
+            <label for="password-signup" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password-signup" name="password-signup" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
 
-</form>
+        <div>
+            <input type="submit" value="Sign Up" class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition duration-300">
+        </div>
+    </form>
+</div>
 
 {{!-- LOG IN FORM --}}
-<h1 id="login-mainheader">LOG IN</h1>
+<div class="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
+    <h1 id="login-mainheader" class="text-2xl font-bold text-center text-green-600 mb-6">LOG IN</h1>
 
-<form id="login-user-form">
+    <form id="login-user-form" class="space-y-4">
+        {{!-- USERNAME --}}
+        <div>
+            <label for="username-login" class="block text-sm font-medium text-gray-700">Username</label>
+            <input type="text" id="username-login" name="username-login" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+        </div>
 
-    {{!-- USERNAME --}}
-    <label for="username" name="username-login">Username</label>
-    <input type="text" id="username-login">
-    
-    {{!-- PASSWORD --}}
-    <label for="password" name="password-login">Password</label>
-    <input type="password" id="password-login">
-    
-    <input type="submit" value="Log In">
+        {{!-- PASSWORD --}}
+        <div>
+            <label for="password-login" class="block text-sm font-medium text-gray-700">Password</label>
+            <input type="password" id="password-login" name="password-login" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm">
+        </div>
 
-</form>
+        <div>
+            <input type="submit" value="Log In" class="w-full bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700 transition duration-300">
+        </div>
+    </form>
+</div>
 
-
- <script src="/js/auth.js"></script>
+<script src="/js/auth.js"></script>

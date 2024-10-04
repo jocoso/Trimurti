@@ -1,33 +1,29 @@
-// Homepage
-
 const router = require("express").Router();
 const { Post } = require("../models");
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
     try {
-
+        // Fetching all posts from the database
         const response = await Post.findAll();
-        const postData = response.map(post => post.get({ plain: true }));
 
-        res.render('home', {
+        // Ensure we have posts to render
+        const postData = response ? response.map(post => post.get({ plain: true })) : [];
+
+        // Render the home page with posts and session data
+        res.render("home", {
             posts: postData,
-            logged_in: req.session.logged_in,
+            logged_in: req.session.logged_in, // Send session status for conditional rendering
         });
-
     } catch (err) {
-
-        // Something weird happened.
         console.error("Failed to fetch post data:", err);
-        res.render('home', {
-            layout: 'main',
+
+        // Render error information if post fetching fails
+        res.render("home", {
             posts: [],
-            error: "Failed to load posts.",
-            logged_in: req.session.logged_in,
+            error: "Failed to load posts.", // Display error on the page
+            logged_in: req.session.logged_in, // Send session status for conditional rendering
         });
-
     }
-
 });
-
 
 module.exports = router;

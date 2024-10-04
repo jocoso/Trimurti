@@ -1,4 +1,3 @@
-// Post
 const router = require("express").Router();
 const { Post, User, Comment } = require("../models");
 
@@ -6,55 +5,64 @@ router.get("/:id", async (req, res) => {
     try {
         const blog_id = req.params.id;
 
-        // Getting by Primary Key
+        // Fetch post by Primary Key
         const post = await Post.findByPk(blog_id, {
             include: [{ model: User, attributes: ["username"] }],
         });
 
-        // Incorrect ID
+        // Post not found
         if (!post) {
             return res.render("post", {
                 logged_in: req.session.logged_in,
                 post: {
-                    title: "The void",
+                    title: "The Void",
                     content: "There is nothing here...",
                 },
                 comments: [],
             });
         }
 
+        // Extract plain data
         const postPlain = post.get({ plain: true });
 
+        // Fetch related comments
         const comments = await Comment.findAll({
-            where: { blog_id },
-            include: [{model: User, attributes: ["username"]}],
-        })
+            where: { post_id: blog_id }, // Assuming the correct foreign key is post_id
+            include: [{ model: User, attributes: ["username"] }],
+        });
 
-        const commentsPlain = await comments.map(comment =>
+        // Convert Sequelize instances to plain objects
+        const commentsPlain = comments.map((comment) =>
             comment.get({ plain: true })
         );
 
-        if(commentsPlain.length === 0) {
-            commentsPlain.push({ title: "Sad", comment: "No comments Here."});
+        // If no comments are found, add a placeholder
+        if (commentsPlain.length === 0) {
+            commentsPlain.push({
+                title: "Sad",
+                content: "No comments here.",
+                User: { username: "Anonymous" }, // Adding username to be consistent
+            });
         }
 
-        res.render('post', {
+        // Render post with comments
+        res.render("post", {
             logged_in: req.session.logged_in,
             post: postPlain,
-            comments: commentsPlain
-        })
-
+            comments: commentsPlain,
+        });
     } catch (err) {
-
         console.error("Error fetching post or comments:", err);
-        res.status(500).render('post', {
+
+        // Error rendering
+        res.status(500).render("post", {
             logged_in: req.session.logged_in,
             post: {
                 title: "Oh No!",
                 content: "Something went really wrong.",
             },
-            comments: []
-        })
+            comments: [],
+        });
     }
 });
 

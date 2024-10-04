@@ -1,11 +1,10 @@
-// Post
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
 
 // Add a new Comment
 router.post("/", async (req, res) => {
     try {
-        const { title, content, blog_id } = req.body;
+        const { title, content, post_id } = req.body; // Assuming 'post_id'
 
         if (!req.session.author_id) {
             return res
@@ -16,21 +15,22 @@ router.post("/", async (req, res) => {
                     error: "- Unauthorized User -",
                 });
         }
+
         // Creating comment
         const newComment = await Comment.create({
             title,
             content,
-            author_id: req.session.author_id,
-            blog_id,
+            author_id: req.session.author_id, // Ensure session contains author_id
+            post_id, // Change from blog_id to post_id to match your model
         });
 
-        // Comment Created without errors.
+        // Comment Created without errors
         res.status(200).json({
             message: "Comment successfully created",
             data: newComment.toJSON(),
         });
     } catch (err) {
-        // Code-Breaking error
+        // Code-breaking error
         res.status(400).json({
             message: "Comment couldn't be created.",
             data: [],
@@ -47,11 +47,10 @@ router.get("/", async (req, res) => {
             include: [{ model: User, attributes: ["username"] }],
         });
 
-        if (!posts) {
-            console.log({ message: "Couldn't find post.", data: [] });
+        if (!posts.length) {
             return res
                 .status(404)
-                .json({ message: "Couldn't find post.", data: [] });
+                .json({ message: "No posts found.", data: [] });
         }
 
         // Posts were found successfully!
@@ -64,20 +63,20 @@ router.get("/", async (req, res) => {
         res.status(400).json({
             message: "Failed to retrieve posts.",
             data: [],
-            error: err,
+            error: err.message,
         });
     }
 });
 
-// Get Comment By Blog ID (Mostly for testing)
-router.get("/:blog_id", async (req, res) => {
+// Get Comments by Post ID (Updated for 'post_id')
+router.get("/:post_id", async (req, res) => {
     try {
-        // Getting by Primary Key
+        // Getting comments by Post ID
         const comments = await Comment.findAll({
-            where: { blog_id: req.params.blog_id },
+            where: { post_id: req.params.post_id }, // Updated to 'post_id'
         });
 
-        // No comments found for the given blog_id
+        // No comments found for the given post_id
         if (!comments.length) {
             return res.status(404).json({
                 message: "No comments found for this post.",
@@ -90,11 +89,10 @@ router.get("/:blog_id", async (req, res) => {
             message: "Comments successfully retrieved.",
             data: comments,
         });
-
     } catch (err) {
         // A code-breaking error
         res.status(400).json({
-            message: "Comments couldn't be retrieved at this time",
+            message: "Comments couldn't be retrieved at this time.",
             data: [],
             error: err.message,
         });
@@ -104,7 +102,7 @@ router.get("/:blog_id", async (req, res) => {
 // Update a Post
 router.put("/:id", async (req, res) => {
     try {
-        // Updating...
+        // Updating post
         const response = await Post.update(req.body, {
             where: {
                 id: req.params.id,
@@ -128,7 +126,7 @@ router.put("/:id", async (req, res) => {
         return res.status(500).json({
             message: "Post couldn't be updated at this time.",
             data: [],
-            error: err,
+            error: err.message,
         });
     }
 });
@@ -137,16 +135,15 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     try {
         // Destroy post...
-        const response = Post.destroy({
+        const response = await Post.destroy({
             where: { id: req.params.id },
         });
 
         // ID is unknown
         if (!response) {
-            return res.status(400).json({
+            return res.status(404).json({
                 message: "Couldn't find post.",
                 data: [],
-                error: new Error("ERROR: User not found."),
             });
         }
 
