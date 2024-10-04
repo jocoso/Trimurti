@@ -11,24 +11,23 @@ const hashPassword = async (password) => {
 // New User
 router.post("/", async (req, res) => {
     try {
-        // Seasoning the password...
+        // Hashing the password
         req.body.password = await hashPassword(req.body.password);
 
-        // Creating user...
+        // Creating user
         const newUser = await User.create({
             username: req.body.username,
             password: req.body.password,
         });
 
-        // Saving user in session.
+        // Saving user in session
         req.session.save(() => {
             req.session.user_id = newUser.id;
             req.session.logged_in = true;
             res.status(200).json(newUser);
         });
     } catch (err) {
-        // We burn it. ):
-        // A code-breaking error happened.
+        // Handling any errors
         res.status(400).json({
             message: "Failed to create user.",
             data: [],
@@ -39,14 +38,13 @@ router.post("/", async (req, res) => {
 
 // Login
 router.post("/login", async (req, res) => {
-    console.log("I HAVE BEEN CALLED!!");
     try {
-        // Finding user...
+        // Finding user by username
         const userData = await User.findOne({
             where: { username: req.body.username },
         });
 
-        // Couldn't find the User.
+        // User not found
         if (!userData) {
             return res.status(400).json({
                 message: "No user registered with that username.",
@@ -54,13 +52,13 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Checking passwords match...
+        // Validating password
         const isPasswordValid = await bcrypt.compare(
             req.body.password,
             userData.password
         );
 
-        // Passwords do not match.
+        // Password mismatch
         if (!isPasswordValid) {
             return res.status(400).json({
                 message: "Incorrect password. Please try again.",
@@ -68,7 +66,7 @@ router.post("/login", async (req, res) => {
             });
         }
 
-        // Success! Saving the session in the store.
+        // Logging in and saving session
         req.session.save(() => {
             req.session.author_id = userData.id;
             req.session.logged_in = true;
@@ -78,7 +76,7 @@ router.post("/login", async (req, res) => {
             });
         });
     } catch (err) {
-        // A code-breaking error happened.
+        // Handling any errors
         res.status(500).json({
             message: "Login has failed. Please try again later...",
             data: [],
@@ -90,9 +88,9 @@ router.post("/login", async (req, res) => {
 // Logout
 router.post("/logout", (req, res) => {
     try {
-        // If a section is active...
+        // Check if the user is logged in
         if (req.session.logged_in) {
-            // Kill session.
+            // Destroy session
             req.session.destroy(() => {
                 return res.status(200).json({
                     message: "Logged out successfully.",
@@ -100,9 +98,6 @@ router.post("/logout", (req, res) => {
                 });
             });
         } else {
-            // If no active session
-
-            // Complain
             return res.status(400).json({
                 message: "No session to log out from.",
                 data: [],
@@ -110,30 +105,25 @@ router.post("/logout", (req, res) => {
             });
         }
     } catch (err) {
-        // A more serious error
+        // Handling any errors
         return res.status(500).json({
-            message: "An error has ocurred while trying to logout.",
+            message: "An error has occurred while trying to log out.",
             data: [],
             error: err.message,
         });
     }
 });
 
-// // Geta All User (for testing)
-// router.get('/', async (req, res) => {
-
-// });
-
-// Delete
+// Delete User
 router.delete("/:id", async (req, res) => {
     try {
-        // Destroying user...
-        const response = User.destroy({
+        // Deleting user
+        const response = await User.destroy({
             where: { id: req.params.id },
         });
 
-        // ID is unknown
-        if (!response) {
+        // User not found
+        if (response === 0) {
             return res.status(400).json({
                 message: "Couldn't find the user.",
                 data: [],
@@ -141,13 +131,13 @@ router.delete("/:id", async (req, res) => {
             });
         }
 
-        // A success!
+        // Success
         res.status(200).json({
             message: "User was deleted successfully!",
-            data: response.body.data,
+            data: response,
         });
     } catch (err) {
-        // A code-breaking error happened.
+        // Handling any errors
         res.status(500).json({
             message: "User couldn't be deleted at this time.",
             data: [],
