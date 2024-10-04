@@ -9,6 +9,7 @@ const callPostPage = () => {
             window.location.href = `/post/${postId}`;
         })
     })
+
 }
 
 

@@ -42,6 +42,56 @@ const postCommentHandler = async (e) => {
         console.log("Both title and content must be provided.");
     }
 };
+const postHandler = async (e) => {
+    e.preventDefault();
 
-// Adding event listener for comment submission
-document.querySelector("#comment-submit").addEventListener("click", postCommentHandler);
+    const title = document.querySelector("#post-title-submit").value.trim(); // Ensure title is grabbed
+    const content = document.querySelector("#post-content").value.trim();
+    
+    // Ensure both title and content are provided
+    if (title && content) {
+        try {
+            const response = await fetch("/api/post/", {
+                method: "POST",
+                body: JSON.stringify({
+                    title,
+                    content // Pass post_id instead of blog_id
+                }),
+                headers: { "Content-Type": "application/json" },
+            });
+
+            if (response.ok) {
+                // Clear input fields
+                document.querySelector("#post-title-submit").value = ""; // Corrected selector
+                document.querySelector("#post-content").value = "";
+
+                // Reload page after a short delay to update the comment section
+                setTimeout(() => {
+                    document.location.reload();
+                }, 100);
+            } else {
+                // Log error details for debugging
+                const errorData = await response.json();
+                console.log("Error posting:", errorData.message);
+            }
+        } catch (err) {
+            console.error("Failed to post:", err);
+        }
+    } else {
+        // Log when title or content is missing
+        console.log("Both title and content must be provided.");
+    }
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+    
+    // Adding event listener for comment submission
+    document.querySelector("#comment-submit").addEventListener("click", postCommentHandler);
+    // Adding event listener for comment submission
+    document.querySelector("#post-submit").addEventListener("click", postHandler);
+})
+
+
+// ---
+
+

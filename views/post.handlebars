@@ -36,7 +36,7 @@
 
     {{! Comment form for logged-in users }}
     {{#if logged_in}}
-        <div class="mt-6">
+        <form class="mt-6">
             <input
                 type="text"
                 id="title-submit"
@@ -49,11 +49,12 @@
                 class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 placeholder="Write your comment..."
             ></textarea>
-            <button
+            <input
                 id="comment-submit"
-                class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300"
-            >Submit Comment</button>
-        </div>
+                type="submit"
+                value="Add a Comment"
+                class="mt-4 w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300">
+        </form>
     {{else}}
         <div
             id="nologin-errorbox"

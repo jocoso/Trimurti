@@ -2,21 +2,18 @@
 const path = require('path');
 const express = require('express');
 const exphbs = require('express-handlebars');
-const Database = require('./connections/connections');
+require('dotenv').config();
+const helmet = require("helmet"); // Optional Security Headers
 
 // FILES
-const controllers = require('./controllers');
 const database = require("./config/connections");
+const controllers = require("./controllers");
 const helpers = require("./utils/helpers");
-require('dotenv').config();
+const sessionConf = require("./config/session");
 
 // SESSION
 const session = require("express-session");
 const Store = require("connect-session-sequelize")(session.Store);
-const sessionConf = require("./config/session");
-
-// Optional Security Headers
-const helmet = require("helmet");
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -29,10 +26,10 @@ const hbs = exphbs.create({ helpers });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
-app.use(sessionConf);
 
-// Security Middleware
-app.use(helmet());
+// Session and security middleware
+app.use(sessionConf);
+app.use(helmet()); // Apply helmet for security
 
 // Configure Express-Handlebars
 app.engine("handlebars", hbs.engine);
@@ -44,14 +41,12 @@ app.use(controllers);
 
 const main = async () => {
     try {
-        database.sync({ force: false }).then(() => {
-            if (process.env.NODE_ENV !== "test") {
-                // Prepping for testing
-                server = app.listen(PORT, () =>
-                    console.log(`Now listening on port ${PORT}`)
-                );
-            }
-        });
+        await database.sync({ force: false });
+        if (process.env.NODE_ENV !== "test") {
+            server = app.listen(PORT, () => 
+                console.log(`Now listening on port ${PORT}`)
+            );
+        }
     } catch (err) {
         console.error(`Error Listening to port ${PORT}:`, err.message);
         process.exit(1);
@@ -61,23 +56,17 @@ const main = async () => {
 main();
 
 // Graceful shutdown
-process.on("SIGINT", () => {
+const gracefulShutdown = (signal) => {
     if (server) {
         server.close(() => {
-            console.log("Server closed due to interruption");
+            console.log(`Server closed due to ${signal}`);
             process.exit(0);
         });
     }
-});
+};
 
-process.on("SIGTERM", () => {
-    if (server) {
-        server.close(() => {
-            console.log("Server closed due to termination");
-            process.exit(0);
-        });
-    }
-});
+process.on("SIGINT", () => gracefulShutdown("interruption"));
+process.on("SIGTERM", () => gracefulShutdown("termination"));
 
 // For testing purposes.
 module.exports = { app, server, database };
