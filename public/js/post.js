@@ -42,6 +42,7 @@ const postCommentHandler = async (e) => {
         console.log("Both title and content must be provided.");
     }
 };
+
 const postHandler = async (e) => {
     e.preventDefault();
 
@@ -65,7 +66,7 @@ const postHandler = async (e) => {
                 document.querySelector("#post-title-submit").value = ""; // Corrected selector
                 document.querySelector("#post-content").value = "";
 
-                // Reload page after a short delay to update the comment section
+                // Reload page after a short delay to update the post section
                 setTimeout(() => {
                     document.location.reload();
                 }, 100);
@@ -85,13 +86,16 @@ const postHandler = async (e) => {
 
 document.addEventListener("DOMContentLoaded", () => {
     
+    const commentSubmitButton = document.querySelector("#comment-submit");
+    const postForm = document.querySelector("#new-post-form");
+
     // Adding event listener for comment submission
-    document.querySelector("#comment-submit").addEventListener("click", postCommentHandler);
-    // Adding event listener for comment submission
-    document.querySelector("#post-submit").addEventListener("click", postHandler);
-})
+    if (commentSubmitButton) {
+        commentSubmitButton.addEventListener("click", postCommentHandler);
+    }
 
-
-// ---
-
-
+    // Adding event listener for post submission
+    if (postForm) {
+        postForm.addEventListener("submit", postHandler);
+    }
+});
