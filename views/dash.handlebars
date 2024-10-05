@@ -1,21 +1,32 @@
-<h1>Dashboard</h1>
-
-{{#each outData}}
-{{!-- Either display blog or an error --}}
-{{#if this.error}}
-<h1>{{this.error}}</h1>
-{{else}}
-<h1>{{this.title}}</h1>
-<p>{{this.content}}</p>
-{{/if}}
-
-{{/each}}
-
-{{!-- Add post button --}}
 {{#if logged_in}}
-<button id="add-post-button">
-    Add A Post
-</button>
-{{/if}}
+    <h1>Dashboard</h1>
 
-<script src="/js/dash.js"></script>
+    {{#if this.error}}
+        <h1>{{this.error}}</h1>
+    {{else}}
+        {{#each outData}}
+            {{! Display blog or an error }}
+            <div class="bg-white shadow-md rounded-lg p-6 mb-8">
+                <h3
+                    class="text-3xl font-bold text-indigo-600 mb-4"
+                >{{this.title}}</h3>
+                <p
+                    class="text-gray-800 leading-relaxed mb-4"
+                >{{this.content}}</p>
+                <p class="text-sm text-gray-600 mb-2">Posted by:
+                    <span
+                        class="font-medium text-indigo-500"
+                    >{{this.User.username}}</span>
+                </p>
+                <p class="text-sm text-gray-500">Created on:
+                    {{this.date_of_creation}}</p>
+            </div>
+        {{/each}}
+    {{/if}}
+
+    {{! Add post button }}
+    <a href="/post/newpost" id="newpostlink" class="cursor-pointer">Add a New
+        Post</a>
+{{else}}
+    <p>You need to log in to see the dashboard</p>
+{{/if}}

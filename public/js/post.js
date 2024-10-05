@@ -48,7 +48,7 @@ const postHandler = async (e) => {
 
     const title = document.querySelector("#post-title-submit").value.trim(); // Ensure title is grabbed
     const content = document.querySelector("#post-content").value.trim();
-    
+
     // Ensure both title and content are provided
     if (title && content) {
         try {
@@ -56,7 +56,7 @@ const postHandler = async (e) => {
                 method: "POST",
                 body: JSON.stringify({
                     title,
-                    content // Pass post_id instead of blog_id
+                    content, // Pass post_id instead of blog_id
                 }),
                 headers: { "Content-Type": "application/json" },
             });
@@ -66,7 +66,7 @@ const postHandler = async (e) => {
                 document.querySelector("#post-title-submit").value = ""; // Corrected selector
                 document.querySelector("#post-content").value = "";
 
-                // Reload page after a short delay to update the comment section
+                // Reload page after a short delay to update the post section
                 setTimeout(() => {
                     document.location.reload();
                 }, 100);
@@ -85,7 +85,6 @@ const postHandler = async (e) => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    
     const commentSubmitButton = document.querySelector("#comment-submit");
     const postForm = document.querySelector("#new-post-form");
 

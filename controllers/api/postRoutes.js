@@ -1,13 +1,11 @@
 // Post
 
-const router = require('express').Router();
-const { Post, User } = require('../../models')
+const router = require("express").Router();
+const { Post, User } = require("../../models");
 
 // Add a new Post
-router.post('/', async (req, res) => {
-
+router.post("/", async (req, res) => {
     try {
-        
         // Retrieving important information about the post and its author...
         const { title, content } = req.body;
         const author_id = req.session.author_id;
@@ -30,18 +28,14 @@ router.post('/', async (req, res) => {
             message: "Post successfully created",
             data: newPost.toJSON(),
         });
-
     } catch (err) {
-
         // Code-Breaking error
         res.status(400).json({
             message: "Post couldn't be created.",
             data: [],
             error: err.message,
         });
-
     }
-
 });
 
 // Get All Posts (Mostly for testing)
@@ -139,9 +133,7 @@ router.put("/:id", async (req, res) => {
 
 // Delete a Post
 router.delete("/:id", async (req, res) => {
-  
     try {
-       
         // Destroy post...
         const response = Post.destroy({
             where: { id: req.params.id },
@@ -152,7 +144,7 @@ router.delete("/:id", async (req, res) => {
             return res.status(400).json({
                 message: "Couldn't find post.",
                 data: [],
-                error: new Error("ERROR: User not found.")
+                error: new Error("ERROR: User not found."),
             });
         }
 
@@ -161,18 +153,14 @@ router.delete("/:id", async (req, res) => {
             message: "Post deleted successfully!",
             data: response,
         });
-
     } catch (err) {
-
         // A code-breaking error happened.
         res.status(500).json({
             message: "Post couldn't be deleted at this time.",
             data: [],
-            error: err.message
+            error: err.message,
         });
-      
     }
-  
 });
 
 module.exports = router;
